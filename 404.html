@@ -1,0 +1,2768 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 | POSTCULTURE</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Abril+Fatface&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    img, svg { -webkit-user-drag: none; user-drag: none; user-select: none; -webkit-user-select: none; }
+
+    :root {
+      --text:          #1a1a1a;
+      --muted:         #4a4a4a;
+      --border:        rgba(0,0,0,0.12);
+      --nav-h:         76px;
+      --footer-h:      148px;
+      --fader-color:   #1a1a1a;
+      --font-ui:       'Josefin Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background-color: #f5f5f0;
+    }
+
+    #bg-pan {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url('https://tjbofficial.github.io/postculture/images/SamElliotBannerRejig.png');
+      background-size: auto;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+
+    #site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: transparent;
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    #logo-svg {
+      height: calc(var(--nav-h) - 8px);
+      width: auto;
+      display: block;
+    }
+
+    #logo-outline-layer { opacity: 1; transition: opacity 0.25s ease; }
+    #logo-filled-layer  { opacity: 0; transition: opacity 0.25s ease; }
+    #logo-svg { filter: none; transition: filter 0.25s ease; }
+
+    #logo:hover #logo-filled-layer  { opacity: 1; }
+    #logo:hover #logo-outline-layer { opacity: 0; }
+
+    #desktop-nav { display: flex; align-items: center; }
+    #desktop-nav ul { list-style: none; display: flex; align-items: center; }
+    #desktop-nav > ul > li { position: relative; }
+
+    #desktop-nav > ul > li > a,
+    #desktop-nav > ul > li > button {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 12px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+
+    #desktop-nav > ul > li > a:hover,
+    #desktop-nav > ul > li > button:hover {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    #desktop-nav > ul > li > button:not(.active):hover {
+      text-decoration: underline;
+    }
+
+
+    .footer-chevron {
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(-135deg); /* points up by default */
+      margin-top: 2px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+
+    .footer-nav-btn-wrap.active .footer-chevron {
+      transform: rotate(45deg); /* points down when active */
+      margin-top: -2px;
+    }
+
+    .chevron {
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      margin-top: -3px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    li.active > button .chevron { transform: rotate(-135deg); margin-top: 2px; }
+
+    /* active nav button state */
+    #desktop-nav > ul > li > button.active .chevron {
+      transform: rotate(-135deg);
+      margin-top: 2px;
+    }
+
+    /* ── HAMBURGER ──────────────────────────────────────────── */
+
+    #mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      width: 36px;
+      height: 36px;
+    }
+
+    #mobile-toggle span {
+      display: block;
+      height: 1.5px;
+      background: var(--text);
+      box-shadow: 0 1px 3px rgba(255,255,255,0.8);
+      transition: transform 0.22s, opacity 0.22s;
+    }
+
+    #mobile-toggle span:nth-child(1) { width: 22px; }
+    #mobile-toggle span:nth-child(2) { width: 14px; }
+    #mobile-toggle span:nth-child(3) { width: 18px; }
+
+    #mobile-toggle.open span:nth-child(1) { width: 22px; transform: translateY(6.5px) rotate(45deg); }
+    #mobile-toggle.open span:nth-child(2) { opacity: 0; }
+    #mobile-toggle.open span:nth-child(3) { width: 22px; transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ── MOBILE DRAWER ──────────────────────────────────────── */
+
+    #mobile-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,0.97);
+      z-index: 99;
+      overflow-y: auto;
+      padding: 32px 28px 60px;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      border-top: 1px solid var(--border);
+    }
+
+    #mobile-drawer.open { transform: translateX(0); }
+
+    .drawer-group { margin-bottom: 32px; }
+
+    .drawer-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 14px;
+    }
+
+    .drawer-group a {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.12s;
+    }
+
+    .drawer-group a:last-child { border-bottom: none; }
+    .drawer-group a:hover { color: var(--muted); }
+
+    /* ── MAIN ───────────────────────────────────────────────── */
+
+    main {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: var(--footer-h);
+      overflow: hidden;
+    }
+
+    /* ── PAGE MODULES ───────────────────────────────────────── */
+
+    .page-module {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column;
+      display: flex;
+      opacity: 0;
+      transform: translateY(-16px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .page-module.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .page-module.closing {
+      opacity: 0;
+      transform: translateY(-16px);
+      pointer-events: none;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+
+    #site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--footer-h);
+      background: transparent;
+      z-index: 100;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 12px 40px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+    }
+
+    /* ── Footer social icons ────────────────────────────────── */
+
+    /* ── Footer social icons — 5-column grid ───────────────── */
+
+    /* ── Footer social icons — 5-column grid ───────────────── */
+
+    body.pastculture-mode .footer-social { display: none; }
+
+    .footer-social {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      width: 100%;
+      padding-bottom: 14px;
+      position: relative;
+    }
+
+    .footer-social-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .footer-social-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      opacity: 0.45;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-decoration: none;
+      padding: 4px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      min-height: 46px;
+    }
+
+    .footer-social-icon:hover,
+    .footer-social-icon.active {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .footer-social-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--text);
+      display: block;
+      transition: fill 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    /* Headphones icon is visually lighter so nudge it up slightly */
+    .footer-social-cell:nth-child(1) .footer-social-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Headphones is 4px taller — increase min-height to match label baseline */
+    .footer-social-cell:nth-child(1) .footer-social-icon {
+      min-height: 50px;
+    }
+
+    /* Per-platform hover colours */
+    .footer-social-cell:nth-child(1) .footer-social-icon:hover svg,
+    .footer-social-cell:nth-child(1) .footer-social-icon.active svg { fill: #1db954; }
+    .footer-social-cell:nth-child(2) .footer-social-icon:hover svg,
+    .footer-social-cell:nth-child(2) .footer-social-icon.active svg { fill: #833ab4; }
+    .footer-social-cell:nth-child(3) .footer-social-icon:hover svg,
+    .footer-social-cell:nth-child(3) .footer-social-icon.active svg { fill: #29abe0; }
+    .footer-social-cell:nth-child(4) .footer-social-icon:hover svg,
+    .footer-social-cell:nth-child(4) .footer-social-icon.active svg { fill: #010101; }
+    .footer-social-cell:nth-child(5) .footer-social-icon:hover svg,
+    .footer-social-cell:nth-child(5) .footer-social-icon.active svg { fill: #ff0000; }
+
+    .footer-social-label {
+      font-family: var(--font-ui);
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .footer-social-icon:hover .footer-social-label { opacity: 1; }
+
+    /* ── Icon popup menus ───────────────────────────────────── */
+
+    .footer-social-icon.active {
+      opacity: 1;
+    }
+
+    .icon-popup {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      background: rgba(255,255,255,0.97);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px 0;
+      min-width: 160px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    /* Left-aligned (Streaming, Socials) */
+    .icon-popup.align-left {
+      left: 0;
+      transform: translateY(6px);
+    }
+    .icon-popup.align-left.active {
+      transform: translateY(0);
+    }
+
+    /* Centre-aligned (Ko-fi) */
+    .icon-popup.align-center {
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+    }
+    .icon-popup.align-center.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Right-aligned (TikTok, YouTube) */
+    .icon-popup.align-right {
+      right: 0;
+      transform: translateY(6px);
+    }
+    .icon-popup.align-right.active {
+      transform: translateY(0);
+    }
+
+    .icon-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .icon-popup a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      padding: 7px 16px;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+
+    .icon-popup a:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .icon-popup a svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Streaming */
+    #popup-streaming a[href*="bandcamp"] svg    { fill: #1da0c3; }
+    #popup-streaming a[href*="apple"] svg       { fill: #fc3c44; }
+    #popup-streaming a[href*="amazon"] svg      { fill: #00a8e0; }
+    #popup-streaming a[href*="deezer"] svg      { fill: #a238ff; }
+    #popup-streaming a[href*="spotify"] svg     { fill: #1db954; }
+    #popup-streaming a[href*="soundcloud"] svg  { fill: #ff5500; }
+    #popup-streaming a[href*="tidal"] svg       { fill: #000000; }
+    #popup-streaming a[href*="youtube"] svg     { fill: #ff0000; }
+
+    /* Socials */
+    #popup-socials a[href*="bsky"] svg          { fill: #0085ff; }
+    #popup-socials a[href*="x.com"] svg         { fill: #000000; }
+    #popup-socials a[href*="instagram"] svg     { fill: #833ab4; }
+
+    /* Support */
+    #popup-support a[href*="ko-fi"] svg         { fill: #29abe0; }
+
+    /* TikTok */
+    #popup-tiktok a svg                         { fill: #010101; }
+
+    /* YouTube */
+    #popup-youtube a svg                        { fill: #ff0000; }
+
+    /* ── Footer nav buttons ─────────────────────────────────── */
+
+    .footer-nav-btn {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .footer-nav-btn:hover,
+    .footer-nav-btn-wrap.active .footer-nav-btn {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    /* STORE button — burnt orange when active or hovered */
+    #store-wrap.active #store-btn,
+    #store-wrap #store-btn:hover {
+      color: #c45c1a;
+    }
+
+    /* STORE icon always burnt orange */
+    #store-btn svg {
+      fill: #c45c1a;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    /* BUY buttons — burnt orange */
+    .merch-buy-btn {
+      color: #c45c1a;
+      border-color: rgba(196,92,26,0.35);
+      background: rgba(255,255,255,0.5);
+    }
+
+    .merch-buy-btn svg { fill: #c45c1a; }
+
+    .merch-buy-btn:hover {
+      background: rgba(196,92,26,0.08);
+      border-color: #c45c1a;
+      color: #c45c1a;
+    }
+
+    .footer-contact-row {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 6px 0 12px;
+    }
+
+    .footer-contact {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .footer-contact:hover {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+
+    .footer-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 6px;
+    }
+
+    .footer-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-bottom: 14px;
+    }
+
+    .footer-nav-btn-wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-nav-sep { display: none; }
+
+    .footer-bottom {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+    }
+
+    .footer-credits-left {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .footer-credits-left a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-credits-left a:hover { border-bottom-color: var(--text); }
+
+    .footer-credits-right {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    .footer-copyright {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+      /* ── Two-row header ── */
+      #site-header {
+        height: auto;
+      }
+      .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 20px 14px;
+        gap: 0;
+        height: auto;
+      }
+      #logo {
+        height: auto;
+      }
+      #logo-svg {
+        height: calc(var(--nav-h) - 8px);
+      }
+      #desktop-nav {
+        display: flex;
+      }
+      #desktop-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+      #desktop-nav > ul > li > a,
+      #desktop-nav > ul > li > button {
+        padding: 4px 12px;
+      }
+      main { top: 94px; }
+      .footer-inner { padding: 0 20px; }
+      #site-footer { height: auto; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-divider { display: none; }
+      .footer-bottom { height: auto; display: flex; justify-content: center; }
+      .footer-credits-left,
+      .footer-credits-right { display: none; }
+    }
+
+    /* ── MUSIC MODULE ───────────────────────────────────────── */
+
+    #module-wrap {
+      position: fixed;
+      right: 24px;
+      bottom: 46px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #music-module {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(0,0,0,0.1);
+      border-bottom: none;
+      border-radius: 20px 20px 0 0;
+      padding: 14px 12px 4px;
+    }
+
+    #module-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+      max-height: 300px;
+      opacity: 1;
+      padding-bottom: 4px;
+      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    }
+
+    #module-buttons.collapsed { max-height: 0; opacity: 0; padding-bottom: 0; }
+
+    .mm-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.12);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .mm-btn:hover  { background: rgba(255,255,255,1); }
+    .mm-btn:disabled { background: rgba(200,200,200,0.7); cursor: not-allowed; opacity: 0.5; }
+
+    #btn-playpause {
+      font-size: 11px;
+      text-align: center;
+      line-height: 34px;
+      padding-left: 2px;
+    }
+
+    #btn-playpause.is-playing {
+      background: rgba(210,210,210,0.85);
+      padding-left: 0;
+      font-size: 13px;
+    }
+
+    #btn-playpause.is-playing:hover { background: rgba(220,220,220,1); }
+
+    .vol-btn.at-limit { background: rgba(200,200,200,0.7); color: rgba(0,0,0,0.3); pointer-events: none; }
+    .vol-btn:active { font-size: 20px; }
+
+    #btn-key {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 6px;
+      transition: background 0.4s ease;
+    }
+
+    #btn-key[data-mode="0"] { background: rgba(255,255,255,0.9); }
+    #btn-key[data-mode="1"] { background: rgba(180,210,228,0.9); }
+    #btn-key[data-mode="2"] { background: rgba(155,195,220,0.9); }
+    #btn-key[data-mode="3"] { background: rgba(248,215,160,0.9); }
+    #btn-key[data-mode="4"] { background: rgba(240,190,150,0.9); }
+    #btn-key[data-mode="5"] { background: rgba(130,180,215,0.9); }
+    #btn-key[data-mode="6"] { background: rgba(245,200,170,0.9); }
+
+    #module-tab {
+      width: 100%;
+      height: 16px;
+      background: #1a1a1a;
+      border-radius: 0 0 8px 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    #module-tab svg { display: block; transition: transform 0.25s ease; }
+    #module-tab.collapsed svg { transform: rotate(180deg); }
+
+    @media (max-width: 768px) { #module-wrap { display: none; } }
+
+    /* ── STRIPPED-BACK MODE: disable module buttons ──────────── */
+
+    #desktop-nav > ul > li > button,
+    .footer-nav-btn {
+      pointer-events: none;
+      cursor: default;
+      color: #999;
+    }
+
+    /* ── 404 ─────────────────────────────────────────────────── */
+
+    #error-404 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #error-404 .error-code {
+      font-family: var(--font-ui);
+      font-size: clamp(72px, 14vw, 180px);
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: 2px;
+    }
+
+    #error-404 .error-message {
+      font-family: var(--font-ui);
+      font-size: clamp(15px, 2vw, 20px);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    #error-404 .return-home {
+      margin-top: 10px;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 3px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    #error-404 .return-home:hover {
+      color: var(--muted);
+      border-bottom-color: var(--muted);
+    }
+
+  </style>
+<link href="https://tjbofficial.github.io/postculture/images/favicon_64x64.png" rel="icon" sizes="64x64" type="image/png"/>
+</head>
+<body>
+<div id="bg-pan"></div>
+<!-- ── HEADER ───────────────────────────────────────────────── -->
+<header id="site-header">
+<div class="header-inner">
+<div id="logo">
+<a href="https://postculturemusic.com" aria-label="Return home">
+<svg aria-label="POSTCULTURE" id="logo-svg" viewbox="0 0 4717 1074" xmlns="http://www.w3.org/2000/svg">
+<g id="logo-filled-layer">
+<path d="M 1968.00,902.00
+           C 1968.00,902.00 3721.00,902.00 3721.00,902.00
+             3721.00,902.00 4269.00,902.00 4269.00,902.00
+             4269.00,902.00 4441.00,902.00 4441.00,902.00
+             4441.00,902.00 4494.00,902.00 4494.00,902.00
+             4494.00,902.00 4523.00,903.00 4523.00,903.00
+             4524.04,899.22 4523.95,891.29 4524.00,887.00
+             4524.00,887.00 4524.00,859.00 4524.00,859.00
+             4524.00,859.00 4523.03,845.00 4523.03,845.00
+             4523.03,845.00 4523.03,680.00 4523.03,680.00
+             4523.03,680.00 4523.03,180.00 4523.03,180.00
+             4523.03,180.00 4523.03,174.00 4523.03,174.00
+             4523.31,168.44 4522.46,168.10 4517.00,168.00
+             4517.00,168.00 4481.00,168.00 4481.00,168.00
+             4478.60,168.00 4472.28,167.34 4470.60,168.77
+             4468.66,170.41 4469.00,174.66 4469.00,177.00
+             4469.00,177.00 4469.00,206.00 4469.00,206.00
+             4469.00,206.00 4469.00,327.00 4469.00,327.00
+             4469.00,327.00 4469.00,839.00 4469.00,839.00
+             4469.00,841.45 4469.19,844.72 4467.98,846.89
+             4464.00,854.01 4446.35,852.00 4439.00,852.01
+             4439.00,852.01 4341.00,852.01 4341.00,852.01
+             4341.00,852.01 3920.00,852.01 3920.00,852.01
+             3920.00,852.01 2423.00,852.01 2423.00,852.01
+             2423.00,852.01 1985.00,852.01 1985.00,852.01
+             1981.89,852.00 1971.46,850.68 1969.60,852.01
+             1967.27,853.81 1968.00,862.13 1968.00,865.00
+             1968.00,865.00 1968.00,902.00 1968.00,902.00 Z
+           M 227.00,899.00
+           C 227.00,899.00 226.00,896.00 226.00,896.00
+             226.00,896.00 225.00,902.00 225.00,902.00
+             225.00,902.00 227.00,900.00 227.00,900.00
+             229.33,902.60 231.68,901.99 235.00,902.04
+             235.00,902.04 267.00,902.04 267.00,902.04
+             267.00,902.04 273.00,902.04 273.00,902.04
+             280.12,902.37 279.00,901.11 279.00,886.00
+             279.00,886.00 279.00,832.00 279.00,832.00
+             279.00,832.00 279.00,602.00 279.00,602.00
+             279.00,602.00 279.00,236.00 279.00,236.00
+             279.01,229.27 278.71,223.34 287.00,222.04
+             287.00,222.04 293.00,222.04 293.00,222.04
+             293.00,222.04 370.00,222.04 370.00,222.04
+             370.00,222.04 670.00,222.04 670.00,222.04
+             670.00,222.04 1954.00,222.04 1954.00,222.04
+             1964.95,221.98 1962.11,220.42 1962.00,211.00
+             1962.00,211.00 1962.00,186.00 1962.00,186.00
+             1962.01,180.26 1964.89,173.00 1957.00,172.02
+             1957.00,172.02 1952.00,172.02 1952.00,172.02
+             1952.00,172.02 1871.00,172.02 1871.00,172.02
+             1871.00,172.02 1573.00,172.02 1573.00,172.02
+             1573.00,172.02 293.00,172.02 293.00,172.02
+             293.00,172.02 273.00,170.00 273.00,170.00
+             273.00,170.00 236.00,170.00 236.00,170.00
+             233.70,170.00 229.59,169.62 228.02,171.60
+             226.56,173.45 227.00,180.46 227.00,183.00
+             227.00,183.00 227.00,212.00 227.00,212.00
+             227.00,212.00 227.00,352.00 227.00,352.00
+             227.00,352.00 227.00,899.00 227.00,899.00 Z
+           M 225.00,171.00
+           C 225.00,171.00 225.00,178.00 225.00,178.00
+             225.00,178.00 225.00,171.00 225.00,171.00 Z
+           M 1288.00,345.46
+           C 1288.00,345.46 1276.00,347.83 1276.00,347.83
+             1270.82,348.35 1269.07,347.58 1263.00,348.81
+             1263.00,348.81 1253.00,351.91 1253.00,351.91
+             1253.00,351.91 1245.00,353.55 1245.00,353.55
+             1245.00,353.55 1238.00,356.54 1238.00,356.54
+             1238.00,356.54 1230.00,358.83 1230.00,358.83
+             1221.44,362.13 1205.01,371.58 1197.99,377.37
+             1186.71,386.68 1177.02,398.56 1171.12,412.00
+             1171.12,412.00 1168.94,419.00 1168.94,419.00
+             1168.94,419.00 1166.25,425.00 1166.25,425.00
+             1166.25,425.00 1164.45,435.00 1164.45,435.00
+             1164.45,435.00 1161.20,444.00 1161.20,444.00
+             1161.20,444.00 1161.20,453.00 1161.20,453.00
+             1160.27,462.44 1159.44,468.29 1161.20,478.00
+             1161.20,478.00 1164.60,487.00 1164.60,487.00
+             1164.60,487.00 1166.25,495.00 1166.25,495.00
+             1171.54,510.69 1182.62,528.15 1196.09,538.00
+             1203.16,543.17 1210.91,547.98 1219.00,551.37
+             1219.00,551.37 1225.00,553.37 1225.00,553.37
+             1225.00,553.37 1232.00,556.44 1232.00,556.44
+             1232.00,556.44 1242.00,558.10 1242.00,558.10
+             1246.12,559.27 1246.68,560.36 1252.00,561.38
+             1252.00,561.38 1261.00,562.39 1261.00,562.39
+             1261.00,562.39 1270.00,565.47 1270.00,565.47
+             1270.00,565.47 1283.00,567.45 1283.00,567.45
+             1286.41,568.48 1287.80,569.73 1292.00,570.53
+             1292.00,570.53 1302.00,571.55 1302.00,571.55
+             1306.00,572.58 1306.94,574.22 1313.00,575.38
+             1313.00,575.38 1323.00,576.22 1323.00,576.22
+             1323.00,576.22 1338.00,581.84 1338.00,581.84
+             1340.14,582.93 1342.07,584.47 1343.83,586.08
+             1348.32,590.21 1352.33,595.28 1354.45,601.00
+             1357.35,608.86 1359.73,613.04 1358.83,622.00
+             1358.26,627.69 1357.47,627.63 1355.07,632.17
+             1348.35,644.91 1348.83,642.83 1337.13,650.83
+             1332.85,653.76 1328.06,657.34 1323.00,658.79
+             1319.57,659.77 1303.07,660.99 1299.00,661.00
+             1289.29,661.02 1279.63,660.98 1270.00,659.57
+             1261.54,658.34 1262.56,657.14 1257.00,655.71
+             1257.00,655.71 1249.00,654.28 1249.00,654.28
+             1249.00,654.28 1243.00,651.27 1243.00,651.27
+             1243.00,651.27 1236.00,649.04 1236.00,649.04
+             1236.00,649.04 1217.00,638.68 1217.00,638.68
+             1208.49,633.11 1199.68,626.91 1192.28,619.92
+             1189.77,617.55 1186.05,612.92 1182.17,614.11
+             1179.91,614.81 1175.30,618.99 1173.41,620.65
+             1173.41,620.65 1160.85,630.24 1160.85,630.24
+             1160.85,630.24 1143.83,643.69 1143.83,643.69
+             1143.83,643.69 1134.25,650.85 1134.25,650.85
+             1132.42,652.36 1125.77,656.76 1125.17,658.22
+             1123.73,661.69 1128.56,665.16 1130.71,667.25
+             1139.13,675.41 1143.54,679.72 1153.00,686.92
+             1171.27,700.83 1187.36,710.26 1209.00,718.00
+             1209.00,718.00 1216.00,720.99 1216.00,720.99
+             1216.00,720.99 1225.00,722.79 1225.00,722.79
+             1225.00,722.79 1234.00,725.88 1234.00,725.88
+             1241.60,727.54 1243.84,726.55 1249.00,727.30
+             1256.20,728.34 1258.96,730.88 1269.00,730.91
+             1269.00,730.91 1297.00,730.91 1297.00,730.91
+             1297.00,730.91 1314.00,727.17 1314.00,727.17
+             1314.00,727.17 1332.00,725.80 1332.00,725.80
+             1332.00,725.80 1342.00,722.53 1342.00,722.53
+             1342.00,722.53 1352.00,721.29 1352.00,721.29
+             1352.00,721.29 1360.00,718.32 1360.00,718.32
+             1360.00,718.32 1367.00,716.67 1367.00,716.67
+             1367.00,716.67 1373.00,714.05 1373.00,714.05
+             1373.00,714.05 1380.00,711.57 1380.00,711.57
+             1385.77,708.84 1395.75,702.14 1400.83,698.15
+             1411.27,689.95 1424.38,671.15 1429.59,659.00
+             1429.59,659.00 1431.47,653.00 1431.47,653.00
+             1431.47,653.00 1434.28,647.00 1434.28,647.00
+             1434.28,647.00 1436.18,637.00 1436.18,637.00
+             1438.63,627.43 1439.98,630.19 1440.00,618.00
+             1440.00,618.00 1440.00,607.00 1440.00,607.00
+             1439.98,594.91 1438.78,598.76 1436.37,590.00
+             1436.37,590.00 1434.43,580.00 1434.43,580.00
+             1434.43,580.00 1431.49,574.00 1431.49,574.00
+             1431.49,574.00 1429.47,568.17 1429.47,568.17
+             1423.86,556.17 1417.57,547.12 1407.58,538.41
+             1395.47,527.87 1381.22,518.92 1366.00,513.84
+             1366.00,513.84 1359.00,512.16 1359.00,512.16
+             1359.00,512.16 1352.00,509.32 1352.00,509.32
+             1352.00,509.32 1326.00,503.15 1326.00,503.15
+             1326.00,503.15 1316.00,499.53 1316.00,499.53
+             1316.00,499.53 1307.00,498.31 1307.00,498.31
+             1307.00,498.31 1300.00,495.41 1300.00,495.41
+             1300.00,495.41 1286.00,493.67 1286.00,493.67
+             1286.00,493.67 1276.00,490.33 1276.00,490.33
+             1276.00,490.33 1269.00,489.32 1269.00,489.32
+             1269.00,489.32 1255.09,483.28 1255.09,483.28
+             1253.34,482.05 1252.28,480.66 1251.02,478.98
+             1248.33,475.43 1244.26,468.14 1242.84,463.91
+             1238.76,451.75 1244.30,439.58 1253.25,431.33
+             1257.02,427.86 1264.26,422.25 1269.00,420.57
+             1269.00,420.57 1281.00,418.37 1281.00,418.37
+             1288.05,416.38 1294.51,414.75 1302.00,415.04
+             1302.00,415.04 1316.00,416.39 1316.00,416.39
+             1316.00,416.39 1323.00,418.65 1323.00,418.65
+             1323.00,418.65 1335.00,420.42 1335.00,420.42
+             1335.00,420.42 1343.00,424.13 1343.00,424.13
+             1343.00,424.13 1349.00,425.57 1349.00,425.57
+             1353.88,427.29 1363.25,432.43 1368.01,435.10
+             1368.01,435.10 1386.27,447.18 1386.27,447.18
+             1388.24,448.72 1391.34,451.96 1394.00,451.27
+             1395.89,450.78 1403.16,443.11 1405.42,441.15
+             1405.42,441.15 1434.87,414.75 1434.87,414.75
+             1438.14,411.63 1446.57,406.14 1443.42,401.27
+             1441.79,398.74 1436.25,394.31 1433.73,392.25
+             1425.89,385.82 1417.87,380.29 1409.16,375.14
+             1409.16,375.14 1386.00,363.13 1386.00,363.13
+             1386.00,363.13 1380.00,361.10 1380.00,361.10
+             1380.00,361.10 1374.00,358.26 1374.00,358.26
+             1374.00,358.26 1366.00,356.33 1366.00,356.33
+             1366.00,356.33 1359.00,353.55 1359.00,353.55
+             1359.00,353.55 1351.00,352.32 1351.00,352.32
+             1342.51,350.36 1342.14,348.15 1330.00,348.00
+             1330.00,348.00 1288.00,345.46 1288.00,345.46 Z
+           M 876.00,346.21
+           C 876.00,346.21 865.00,347.91 865.00,347.91
+             859.14,348.31 856.31,347.73 850.00,349.35
+             850.00,349.35 842.00,352.22 842.00,352.22
+             842.00,352.22 835.00,353.84 835.00,353.84
+             805.93,363.49 781.81,379.31 761.93,402.75
+             756.95,408.63 743.97,428.25 740.62,435.09
+             740.62,435.09 734.74,449.00 734.74,449.00
+             731.89,455.24 728.78,461.38 726.80,468.00
+             726.80,468.00 725.22,476.00 725.22,476.00
+             725.22,476.00 722.49,484.00 722.49,484.00
+             722.49,484.00 720.48,495.00 720.48,495.00
+             720.48,495.00 718.60,501.00 718.60,501.00
+             717.05,506.89 717.07,512.97 717.00,519.00
+             717.00,519.00 716.00,532.00 716.00,532.00
+             716.00,532.00 716.00,549.00 716.00,549.00
+             716.00,549.00 717.00,562.00 717.00,562.00
+             717.07,568.28 716.80,573.84 718.62,580.00
+             718.62,580.00 720.65,586.00 720.65,586.00
+             720.65,586.00 722.67,596.00 722.67,596.00
+             722.67,596.00 725.15,602.00 725.15,602.00
+             725.15,602.00 726.96,610.00 726.96,610.00
+             731.21,622.06 737.55,634.13 743.93,645.17
+             761.72,675.98 775.39,690.26 805.83,708.77
+             813.59,713.50 817.98,714.97 826.00,718.51
+             826.00,718.51 832.00,721.31 832.00,721.31
+             832.00,721.31 839.00,722.64 839.00,722.64
+             839.00,722.64 847.00,725.77 847.00,725.77
+             847.00,725.77 863.00,727.44 863.00,727.44
+             870.64,728.63 878.18,730.97 886.00,730.97
+             893.95,730.97 901.28,728.40 909.00,727.30
+             909.00,727.30 921.00,726.72 921.00,726.72
+             932.91,725.29 930.47,724.05 937.00,722.53
+             937.00,722.53 946.00,720.99 946.00,720.99
+             946.00,720.99 953.00,718.01 953.00,718.01
+             953.00,718.01 959.00,716.32 959.00,716.32
+             969.60,712.24 979.78,706.13 989.15,699.74
+             1001.66,691.21 1013.84,681.37 1023.63,669.73
+             1023.63,669.73 1031.37,659.00 1031.37,659.00
+             1031.37,659.00 1036.74,652.00 1036.74,652.00
+             1036.74,652.00 1052.14,621.00 1052.14,621.00
+             1052.14,621.00 1054.32,613.00 1054.32,613.00
+             1054.32,613.00 1057.06,606.00 1057.06,606.00
+             1057.06,606.00 1058.54,599.00 1058.54,599.00
+             1058.54,599.00 1061.37,590.00 1061.37,590.00
+             1061.37,590.00 1063.17,573.00 1063.17,573.00
+             1063.94,566.16 1065.90,561.99 1066.00,554.00
+             1066.00,554.00 1066.00,520.00 1066.00,520.00
+             1065.98,509.41 1064.72,511.29 1063.32,503.00
+             1063.32,503.00 1061.54,489.00 1061.54,489.00
+             1061.54,489.00 1058.78,480.00 1058.78,480.00
+             1058.78,480.00 1057.06,472.00 1057.06,472.00
+             1057.06,472.00 1054.40,465.00 1054.40,465.00
+             1054.40,465.00 1052.39,457.00 1052.39,457.00
+             1052.39,457.00 1049.32,450.00 1049.32,450.00
+             1043.51,434.79 1036.04,419.85 1025.95,406.92
+             1010.88,387.59 992.04,373.45 970.00,363.12
+             970.00,363.12 964.00,360.95 964.00,360.95
+             964.00,360.95 958.00,358.25 958.00,358.25
+             958.00,358.25 951.00,356.55 951.00,356.55
+             951.00,356.55 943.00,353.53 943.00,353.53
+             943.00,353.53 936.00,352.52 936.00,352.52
+             929.01,351.06 928.06,348.17 914.00,348.00
+             914.00,348.00 882.00,346.21 882.00,346.21
+             882.00,346.21 876.00,346.21 876.00,346.21 Z
+           M 2090.00,589.00
+           C 2089.93,596.49 2085.50,607.29 2082.06,614.00
+             2072.79,632.14 2061.02,642.44 2043.00,651.11
+             2043.00,651.11 2037.00,654.29 2037.00,654.29
+             2037.00,654.29 2031.00,655.87 2031.00,655.87
+             2031.00,655.87 2024.00,658.87 2024.00,658.87
+             2024.00,658.87 2003.00,661.96 2003.00,661.96
+             1999.37,662.10 1982.41,660.04 1979.00,659.06
+             1979.00,659.06 1972.00,656.06 1972.00,656.06
+             1972.00,656.06 1965.00,653.87 1965.00,653.87
+             1948.06,646.21 1933.10,632.55 1923.34,616.72
+             1923.34,616.72 1912.87,596.00 1912.87,596.00
+             1912.87,596.00 1911.17,588.17 1911.17,588.17
+             1911.17,588.17 1908.41,581.96 1908.41,581.96
+             1906.63,574.93 1905.91,547.37 1906.00,539.00
+             1906.00,539.00 1907.00,526.00 1907.00,526.00
+             1907.09,518.20 1906.77,500.99 1908.41,494.00
+             1908.41,494.00 1911.45,486.00 1911.45,486.00
+             1911.45,486.00 1912.89,478.00 1912.89,478.00
+             1912.89,478.00 1916.56,471.00 1916.56,471.00
+             1925.53,452.31 1940.67,435.61 1959.17,425.89
+             1959.17,425.89 1964.00,423.86 1964.00,423.86
+             1964.00,423.86 1969.00,420.94 1969.00,420.94
+             1971.19,419.88 1972.79,419.72 1975.00,419.03
+             1984.53,416.05 1984.17,415.02 1995.00,415.00
+             1995.00,415.00 2013.00,415.00 2013.00,415.00
+             2023.48,415.13 2022.83,417.05 2030.00,419.20
+             2030.00,419.20 2036.91,420.72 2036.91,420.72
+             2036.91,420.72 2042.17,423.89 2042.17,423.89
+             2042.17,423.89 2048.00,426.48 2048.00,426.48
+             2057.12,431.69 2068.77,443.16 2074.49,452.00
+             2074.49,452.00 2085.32,472.00 2085.32,472.00
+             2085.32,472.00 2087.20,478.00 2087.20,478.00
+             2088.49,481.29 2089.96,486.43 2094.06,486.42
+             2098.87,486.40 2102.69,483.55 2107.00,482.00
+             2107.00,482.00 2118.00,477.66 2118.00,477.66
+             2118.00,477.66 2125.00,475.47 2125.00,475.47
+             2125.00,475.47 2145.00,466.95 2145.00,466.95
+             2145.00,466.95 2159.69,461.49 2159.69,461.49
+             2160.85,460.81 2161.33,460.16 2161.67,458.86
+             2162.50,455.65 2156.10,442.42 2154.33,439.00
+             2144.21,419.41 2134.31,404.00 2117.91,388.87
+             2104.15,376.18 2084.70,364.46 2067.00,358.48
+             2067.00,358.48 2059.00,356.41 2059.00,356.41
+             2059.00,356.41 2051.00,353.53 2051.00,353.53
+             2051.00,353.53 2042.00,352.18 2042.00,352.18
+             2042.00,352.18 2034.00,349.63 2034.00,349.63
+             2034.00,349.63 2018.00,348.00 2018.00,348.00
+             2018.00,348.00 1978.00,348.00 1978.00,348.00
+             1966.03,348.14 1965.74,350.28 1957.00,352.32
+             1957.00,352.32 1949.00,353.85 1949.00,353.85
+             1949.00,353.85 1942.00,356.76 1942.00,356.76
+             1900.70,370.95 1870.67,400.37 1850.88,439.00
+             1850.88,439.00 1845.68,450.00 1845.68,450.00
+             1845.68,450.00 1843.73,456.00 1843.73,456.00
+             1843.73,456.00 1840.72,462.00 1840.72,462.00
+             1840.72,462.00 1839.28,469.00 1839.28,469.00
+             1839.28,469.00 1835.57,477.00 1835.57,477.00
+             1835.57,477.00 1834.37,486.00 1834.37,486.00
+             1833.44,489.28 1831.81,491.07 1831.21,495.00
+             1831.21,495.00 1829.79,515.00 1829.79,515.00
+             1829.79,515.00 1828.17,522.00 1828.17,522.00
+             1826.79,529.57 1826.99,533.50 1827.00,541.00
+             1827.01,548.91 1828.77,553.66 1829.79,561.00
+             1829.79,561.00 1831.41,582.00 1831.41,582.00
+             1831.41,582.00 1834.59,590.00 1834.59,590.00
+             1834.59,590.00 1835.57,599.00 1835.57,599.00
+             1835.57,599.00 1839.28,607.00 1839.28,607.00
+             1839.28,607.00 1840.87,614.91 1840.87,614.91
+             1840.87,614.91 1844.13,621.09 1844.13,621.09
+             1844.13,621.09 1845.70,626.83 1845.70,626.83
+             1845.70,626.83 1848.10,631.17 1848.10,631.17
+             1848.10,631.17 1850.00,636.96 1850.00,636.96
+             1850.00,636.96 1860.54,656.58 1860.54,656.58
+             1876.10,681.72 1900.23,701.95 1927.00,714.03
+             1927.00,714.03 1944.00,721.28 1944.00,721.28
+             1944.00,721.28 1952.00,722.63 1952.00,722.63
+             1952.00,722.63 1959.00,725.37 1959.00,725.37
+             1964.15,726.88 1970.66,726.94 1976.00,727.00
+             1976.00,727.00 2000.00,730.00 2000.00,730.00
+             2012.36,730.14 2014.85,728.66 2026.00,727.29
+             2026.00,727.29 2045.00,725.83 2045.00,725.83
+             2045.00,725.83 2054.00,722.79 2054.00,722.79
+             2054.00,722.79 2063.00,721.15 2063.00,721.15
+             2063.00,721.15 2069.00,718.51 2069.00,718.51
+             2085.87,711.48 2101.65,703.37 2115.41,690.96
+             2132.47,675.58 2143.29,658.09 2153.78,638.00
+             2153.78,638.00 2159.58,625.00 2159.58,625.00
+             2160.55,623.00 2162.19,620.71 2161.37,618.37
+             2159.65,613.48 2150.46,612.85 2146.42,610.64
+             2139.92,607.08 2141.23,608.74 2136.00,606.61
+             2136.00,606.61 2130.00,603.70 2130.00,603.70
+             2130.00,603.70 2124.00,602.13 2124.00,602.13
+             2124.00,602.13 2117.00,598.72 2117.00,598.72
+             2117.00,598.72 2110.00,596.93 2110.00,596.93
+             2103.92,594.51 2096.32,589.71 2090.00,589.00 Z
+           M 393.00,354.00
+           C 392.25,355.85 391.68,356.94 391.50,359.00
+             391.50,359.00 392.00,386.00 392.00,386.00
+             392.00,386.00 392.00,457.00 392.00,457.00
+             392.00,457.00 392.00,705.00 392.00,705.00
+             391.98,715.43 388.68,720.80 399.00,721.00
+             399.00,721.00 454.00,721.00 454.00,721.00
+             455.99,721.00 459.81,721.23 461.40,719.98
+             463.10,718.63 462.96,715.95 463.00,714.00
+             463.00,714.00 463.00,693.00 463.00,693.00
+             463.00,693.00 463.00,602.00 463.00,602.00
+             463.00,599.37 462.78,595.50 464.17,593.23
+             467.13,588.39 481.64,590.00 487.00,590.00
+             487.00,590.00 561.00,590.00 561.00,590.00
+             573.92,589.98 570.11,587.80 579.00,585.68
+             579.00,585.68 585.91,584.58 585.91,584.58
+             585.91,584.58 592.09,581.47 592.09,581.47
+             592.09,581.47 597.83,579.61 597.83,579.61
+             597.83,579.61 602.17,577.03 602.17,577.03
+             606.45,574.62 610.62,572.55 614.58,569.55
+             629.39,558.35 642.92,539.84 650.71,523.00
+             650.71,523.00 652.80,517.00 652.80,517.00
+             652.80,517.00 655.58,511.00 655.58,511.00
+             655.58,511.00 657.42,504.17 657.42,504.17
+             658.52,501.34 660.05,500.30 660.86,496.99
+             660.86,496.99 660.86,488.00 660.86,488.00
+             660.86,488.00 662.00,475.00 662.00,475.00
+             662.00,475.00 661.00,455.00 661.00,455.00
+             660.79,437.03 659.76,445.16 657.18,435.91
+             657.18,435.91 655.58,429.00 655.58,429.00
+             655.58,429.00 652.79,423.00 652.79,423.00
+             642.27,398.20 621.62,378.95 598.00,366.50
+             592.75,363.73 588.81,361.31 583.00,359.40
+             577.58,357.62 556.97,355.01 551.00,355.00
+             551.00,355.00 448.00,355.00 448.00,355.00
+             435.10,355.00 403.85,355.94 393.00,354.00 Z
+           M 1501.51,355.04
+           C 1498.10,358.88 1499.94,363.21 1500.00,368.00
+             1500.00,368.00 1500.00,407.00 1500.00,407.00
+             1499.99,410.89 1497.89,421.68 1502.30,423.08
+             1502.30,423.08 1511.00,423.08 1511.00,423.08
+             1511.00,423.08 1590.00,423.08 1590.00,423.08
+             1599.37,423.01 1603.93,423.30 1604.00,434.00
+             1604.00,434.00 1604.00,490.00 1604.00,490.00
+             1604.00,490.00 1604.00,713.00 1604.00,713.00
+             1604.02,724.48 1606.04,721.12 1616.00,721.00
+             1616.00,721.00 1658.00,721.00 1658.00,721.00
+             1661.60,721.01 1672.11,722.72 1674.31,720.35
+             1675.87,718.68 1675.00,706.03 1675.00,703.00
+             1675.00,703.00 1675.00,654.00 1675.00,654.00
+             1675.00,654.00 1675.00,436.00 1675.00,436.00
+             1675.00,433.66 1674.87,430.18 1675.74,428.04
+             1678.63,420.93 1691.61,423.00 1698.00,423.00
+             1698.00,423.00 1767.00,423.00 1767.00,423.00
+             1778.07,423.02 1779.93,425.95 1780.00,416.00
+             1780.00,416.00 1780.00,363.00 1780.00,363.00
+             1780.00,360.86 1780.38,356.46 1778.40,355.04
+             1777.10,354.22 1769.17,355.00 1767.00,355.04
+             1767.00,355.04 1716.00,355.04 1716.00,355.04
+             1716.00,355.04 1568.00,355.04 1568.00,355.04
+             1568.00,355.04 1522.00,355.04 1522.00,355.04
+             1522.00,355.04 1501.51,355.04 1501.51,355.04 Z
+           M 3036.00,721.00
+           C 3045.68,722.25 3042.68,721.10 3051.00,721.00
+             3051.00,721.00 3092.00,721.00 3092.00,721.00
+             3095.22,721.01 3104.38,722.54 3106.23,720.40
+             3107.79,718.60 3107.00,706.06 3107.00,703.00
+             3107.00,703.00 3107.00,654.00 3107.00,654.00
+             3107.00,654.00 3107.00,436.00 3107.00,436.00
+             3107.00,433.50 3106.81,430.30 3108.02,428.05
+             3111.80,421.07 3126.01,423.00 3133.00,423.00
+             3133.00,423.00 3187.00,423.00 3187.00,423.00
+             3187.00,423.00 3213.10,423.00 3213.10,423.00
+             3214.08,416.14 3213.08,416.44 3213.10,410.00
+             3213.10,410.00 3213.10,370.00 3213.10,370.00
+             3213.10,370.00 3213.10,362.00 3213.10,362.00
+             3214.06,352.34 3206.42,354.92 3200.00,355.00
+             3200.00,355.00 3150.00,355.00 3150.00,355.00
+             3150.00,355.00 2944.00,355.00 2944.00,355.00
+             2932.93,354.98 2931.07,352.05 2931.00,362.00
+             2931.00,362.00 2931.00,415.00 2931.00,415.00
+             2931.00,416.90 2930.77,420.89 2932.02,422.36
+             2933.51,424.12 2941.44,423.00 2944.00,423.00
+             2944.00,423.00 3023.00,423.00 3023.00,423.00
+             3032.23,423.01 3035.93,423.77 3036.00,434.00
+             3036.00,434.00 3036.00,492.00 3036.00,492.00
+             3036.00,492.00 3036.00,721.00 3036.00,721.00 Z
+           M 3705.43,355.01
+           C 3704.68,355.86 3704.55,355.36 3703.74,357.15
+             3702.51,359.85 3703.00,375.94 3703.00,380.00
+             3703.00,380.00 3703.00,447.00 3703.00,447.00
+             3703.00,447.00 3703.00,713.00 3703.00,713.00
+             3703.00,715.24 3702.59,719.33 3704.57,720.91
+             3706.36,722.15 3715.94,720.94 3719.00,720.91
+             3719.00,720.91 3732.00,722.00 3732.00,722.00
+             3732.00,722.00 3757.00,722.00 3757.00,722.00
+             3757.00,722.00 3937.00,722.00 3937.00,722.00
+             3937.00,722.00 3954.00,721.00 3954.00,721.00
+             3954.00,721.00 3980.00,721.00 3980.00,721.00
+             3982.56,721.00 3992.55,722.74 3993.09,719.68
+             3993.44,717.75 3990.49,713.82 3989.51,712.00
+             3989.51,712.00 3976.15,689.83 3976.15,689.83
+             3976.15,689.83 3964.32,669.00 3964.32,669.00
+             3964.32,669.00 3957.57,658.00 3957.57,658.00
+             3957.57,658.00 3951.82,646.96 3951.82,646.96
+             3951.82,646.96 3947.06,640.01 3947.06,640.01
+             3947.06,640.01 3940.91,628.28 3940.91,628.28
+             3940.91,628.28 3937.30,622.96 3937.30,622.96
+             3937.30,622.96 3931.97,613.28 3931.97,613.28
+             3931.97,613.28 3926.52,605.00 3926.52,605.00
+             3926.52,605.00 3913.32,581.16 3913.32,581.16
+             3912.09,578.68 3909.71,576.70 3910.01,574.07
+             3910.62,568.63 3919.06,566.29 3923.00,563.97
+             3934.65,557.11 3945.43,550.02 3954.59,539.91
+             3962.53,531.15 3970.18,521.27 3974.30,510.00
+             3974.30,510.00 3975.98,503.00 3975.98,503.00
+             3978.78,493.61 3979.98,494.98 3980.00,484.00
+             3980.00,484.00 3980.00,453.00 3980.00,453.00
+             3979.90,444.37 3978.53,443.48 3976.43,436.00
+             3973.20,424.52 3977.24,427.76 3967.45,411.00
+             3967.45,411.00 3963.76,404.00 3963.76,404.00
+             3954.94,389.91 3942.08,378.81 3928.00,370.26
+             3928.00,370.26 3916.00,363.27 3916.00,363.27
+             3916.00,363.27 3909.00,361.38 3909.00,361.38
+             3909.00,361.38 3900.00,358.04 3900.00,358.04
+             3894.58,356.70 3892.87,357.30 3888.00,356.83
+             3888.00,356.83 3871.00,355.01 3871.00,355.01
+             3871.00,355.01 3854.00,355.01 3854.00,355.01
+             3854.00,355.01 3782.00,355.01 3782.00,355.01
+             3782.00,355.01 3729.00,355.01 3729.00,355.01
+             3729.00,355.01 3705.43,355.01 3705.43,355.01 Z
+           M 2668.00,357.00
+           C 2668.00,357.00 2669.00,371.00 2669.00,371.00
+             2669.00,371.00 2669.00,482.00 2669.00,482.00
+             2669.00,482.00 2669.00,704.00 2669.00,704.00
+             2669.00,704.00 2668.00,721.00 2668.00,721.00
+             2668.00,721.00 2692.00,721.00 2692.00,721.00
+             2692.00,721.00 2740.00,721.00 2740.00,721.00
+             2740.00,721.00 2890.00,721.00 2890.00,721.00
+             2892.69,721.00 2901.51,722.33 2902.96,720.39
+             2903.81,719.09 2903.01,712.10 2902.96,710.00
+             2902.96,710.00 2902.96,666.00 2902.96,666.00
+             2903.03,659.85 2904.33,657.91 2902.00,652.00
+             2894.14,653.91 2864.09,653.00 2854.00,653.00
+             2854.00,653.00 2758.00,653.00 2758.00,653.00
+             2751.54,653.01 2742.52,654.69 2739.60,646.98
+             2738.89,645.11 2739.00,642.04 2739.00,640.00
+             2739.00,640.00 2739.00,566.00 2739.00,566.00
+             2739.00,566.00 2739.00,370.00 2739.00,370.00
+             2739.02,358.41 2741.87,356.02 2730.00,356.00
+             2716.44,355.97 2678.99,355.03 2668.00,357.00 Z
+           M 4091.00,721.00
+           C 4097.32,722.80 4110.84,722.00 4118.00,722.00
+             4118.00,722.00 4169.00,722.00 4169.00,722.00
+             4169.00,722.00 4336.00,722.00 4336.00,722.00
+             4338.47,722.00 4343.19,722.55 4344.12,719.69
+             4344.12,719.69 4344.12,702.00 4344.12,702.00
+             4344.00,690.19 4343.13,666.44 4345.00,656.00
+             4339.22,653.45 4338.07,654.93 4332.00,655.00
+             4332.00,655.00 4306.00,655.00 4306.00,655.00
+             4306.00,655.00 4214.00,655.00 4214.00,655.00
+             4203.01,654.98 4198.06,653.03 4198.00,641.00
+             4198.00,641.00 4198.00,581.00 4198.00,581.00
+             4198.00,578.59 4197.87,575.24 4198.74,573.00
+             4202.10,564.36 4216.43,567.00 4224.00,567.00
+             4224.00,567.00 4306.00,567.00 4306.00,567.00
+             4314.64,566.98 4314.98,566.64 4315.00,558.00
+             4315.00,558.00 4315.00,504.00 4315.00,504.00
+             4315.00,504.00 4211.00,504.00 4211.00,504.00
+             4201.94,503.99 4198.14,503.15 4198.00,493.00
+             4198.00,493.00 4198.00,437.00 4198.00,437.00
+             4198.00,434.50 4197.81,431.30 4199.02,429.05
+             4202.88,421.91 4218.81,424.00 4226.00,424.00
+             4226.00,424.00 4315.00,424.00 4315.00,424.00
+             4318.10,424.00 4327.27,425.51 4328.99,423.26
+             4330.08,421.78 4329.03,415.28 4328.99,413.00
+             4328.99,413.00 4328.99,371.00 4328.99,371.00
+             4329.02,359.63 4332.34,356.16 4323.00,356.00
+             4323.00,356.00 4275.00,356.00 4275.00,356.00
+             4275.00,356.00 4101.00,356.00 4101.00,356.00
+             4099.01,356.00 4095.19,355.77 4093.60,357.02
+             4091.05,359.04 4092.00,373.32 4092.00,377.00
+             4092.00,377.00 4092.00,441.00 4092.00,441.00
+             4092.00,441.00 4092.00,627.00 4092.00,627.00
+             4092.00,627.00 4092.00,686.00 4092.00,686.00
+             4092.00,696.40 4092.76,711.19 4091.00,721.00 Z
+           M 2247.00,357.00
+           C 2247.00,357.00 2247.00,529.00 2247.00,529.00
+             2247.00,529.00 2246.00,546.00 2246.00,546.00
+             2246.00,546.00 2246.00,577.00 2246.00,577.00
+             2246.03,593.74 2249.38,594.84 2250.70,604.00
+             2250.70,604.00 2251.39,615.00 2251.39,615.00
+             2251.39,615.00 2254.90,624.00 2254.90,624.00
+             2254.90,624.00 2256.68,631.83 2256.68,631.83
+             2256.68,631.83 2259.32,637.09 2259.32,637.09
+             2259.32,637.09 2261.13,643.00 2261.13,643.00
+             2261.13,643.00 2264.50,649.00 2264.50,649.00
+             2278.68,675.98 2299.81,697.22 2327.00,711.25
+             2327.00,711.25 2333.00,713.87 2333.00,713.87
+             2333.00,713.87 2348.00,721.28 2348.00,721.28
+             2348.00,721.28 2355.00,722.87 2355.00,722.87
+             2355.00,722.87 2362.00,725.79 2362.00,725.79
+             2367.32,727.28 2370.85,726.63 2375.00,727.32
+             2383.15,728.69 2383.52,730.95 2395.00,731.00
+             2395.00,731.00 2403.00,731.00 2403.00,731.00
+             2412.78,730.88 2414.05,728.48 2421.00,727.32
+             2425.34,726.60 2427.67,727.52 2434.00,725.96
+             2434.00,725.96 2443.00,722.63 2443.00,722.63
+             2443.00,722.63 2450.00,721.13 2450.00,721.13
+             2450.00,721.13 2466.00,713.82 2466.00,713.82
+             2485.12,704.64 2498.52,694.70 2512.65,678.71
+             2518.88,671.67 2524.50,663.66 2529.30,655.58
+             2529.30,655.58 2531.87,650.28 2531.87,650.28
+             2531.87,650.28 2534.59,645.91 2534.59,645.91
+             2534.59,645.91 2536.38,641.17 2536.38,641.17
+             2536.38,641.17 2539.30,635.91 2539.30,635.91
+             2539.30,635.91 2540.70,631.00 2540.70,631.00
+             2540.70,631.00 2544.43,623.00 2544.43,623.00
+             2544.43,623.00 2545.33,611.00 2545.33,611.00
+             2546.72,602.98 2548.98,605.71 2549.00,593.00
+             2549.00,593.00 2549.00,533.00 2549.00,533.00
+             2549.00,533.00 2549.00,371.00 2549.00,371.00
+             2549.02,359.31 2552.39,357.07 2542.00,357.00
+             2542.00,357.00 2487.00,357.00 2487.00,357.00
+             2487.00,357.00 2472.00,358.00 2472.00,358.00
+             2472.00,358.00 2327.00,358.00 2327.00,358.00
+             2327.00,358.00 2310.00,357.00 2310.00,357.00
+             2310.00,357.00 2247.00,357.00 2247.00,357.00 Z
+           M 3282.00,357.00
+           C 3282.00,357.00 3282.00,529.00 3282.00,529.00
+             3282.00,529.00 3281.00,546.00 3281.00,546.00
+             3281.00,546.00 3281.00,577.00 3281.00,577.00
+             3281.03,593.74 3284.38,594.84 3285.70,604.00
+             3285.70,604.00 3286.39,615.00 3286.39,615.00
+             3286.39,615.00 3289.90,624.00 3289.90,624.00
+             3289.90,624.00 3291.68,631.83 3291.68,631.83
+             3291.68,631.83 3294.32,637.09 3294.32,637.09
+             3294.32,637.09 3296.13,643.00 3296.13,643.00
+             3296.13,643.00 3299.50,649.00 3299.50,649.00
+             3313.68,675.98 3334.81,697.22 3362.00,711.25
+             3362.00,711.25 3368.00,713.87 3368.00,713.87
+             3368.00,713.87 3383.00,721.28 3383.00,721.28
+             3383.00,721.28 3390.00,722.87 3390.00,722.87
+             3390.00,722.87 3397.00,725.79 3397.00,725.79
+             3402.32,727.28 3405.85,726.63 3410.00,727.32
+             3418.15,728.69 3418.52,730.95 3430.00,731.00
+             3430.00,731.00 3438.00,731.00 3438.00,731.00
+             3447.78,730.88 3449.05,728.48 3456.00,727.32
+             3460.34,726.60 3462.67,727.52 3469.00,725.96
+             3469.00,725.96 3478.00,722.63 3478.00,722.63
+             3478.00,722.63 3485.00,721.13 3485.00,721.13
+             3485.00,721.13 3501.00,713.82 3501.00,713.82
+             3520.12,704.64 3533.52,694.70 3547.65,678.71
+             3553.88,671.67 3559.50,663.66 3564.30,655.58
+             3564.30,655.58 3566.87,650.28 3566.87,650.28
+             3566.87,650.28 3569.59,645.91 3569.59,645.91
+             3569.59,645.91 3571.38,641.17 3571.38,641.17
+             3571.38,641.17 3574.30,635.91 3574.30,635.91
+             3574.30,635.91 3575.70,631.00 3575.70,631.00
+             3575.70,631.00 3579.43,623.00 3579.43,623.00
+             3579.43,623.00 3580.33,611.00 3580.33,611.00
+             3581.72,602.98 3583.98,605.71 3584.00,593.00
+             3584.00,593.00 3584.00,533.00 3584.00,533.00
+             3584.00,533.00 3584.00,371.00 3584.00,371.00
+             3584.02,359.31 3587.39,357.07 3577.00,357.00
+             3577.00,357.00 3522.00,357.00 3522.00,357.00
+             3522.00,357.00 3507.00,358.00 3507.00,358.00
+             3507.00,358.00 3362.00,358.00 3362.00,358.00
+             3362.00,358.00 3345.00,357.00 3345.00,357.00
+             3345.00,357.00 3282.00,357.00 3282.00,357.00 " fill="black" stroke="none"></path>
+</g>
+<g id="logo-outline-layer">
+<path d="M 1968.00,902.00
+           C 1968.00,902.00 3721.00,902.00 3721.00,902.00
+             3721.00,902.00 4269.00,902.00 4269.00,902.00
+             4269.00,902.00 4441.00,902.00 4441.00,902.00
+             4441.00,902.00 4494.00,902.00 4494.00,902.00
+             4494.00,902.00 4523.00,903.00 4523.00,903.00
+             4524.04,899.22 4523.95,891.29 4524.00,887.00
+             4524.00,887.00 4524.00,859.00 4524.00,859.00
+             4524.00,859.00 4523.03,845.00 4523.03,845.00
+             4523.03,845.00 4523.03,680.00 4523.03,680.00
+             4523.03,680.00 4523.03,180.00 4523.03,180.00
+             4523.03,180.00 4523.03,174.00 4523.03,174.00
+             4523.31,168.44 4522.46,168.10 4517.00,168.00
+             4517.00,168.00 4481.00,168.00 4481.00,168.00
+             4478.60,168.00 4472.28,167.34 4470.60,168.77
+             4468.66,170.41 4469.00,174.66 4469.00,177.00
+             4469.00,177.00 4469.00,206.00 4469.00,206.00
+             4469.00,206.00 4469.00,327.00 4469.00,327.00
+             4469.00,327.00 4469.00,839.00 4469.00,839.00
+             4469.00,841.45 4469.19,844.72 4467.98,846.89
+             4464.00,854.01 4446.35,852.00 4439.00,852.01
+             4439.00,852.01 4341.00,852.01 4341.00,852.01
+             4341.00,852.01 3920.00,852.01 3920.00,852.01
+             3920.00,852.01 2423.00,852.01 2423.00,852.01
+             2423.00,852.01 1985.00,852.01 1985.00,852.01
+             1981.89,852.00 1971.46,850.68 1969.60,852.01
+             1967.27,853.81 1968.00,862.13 1968.00,865.00
+             1968.00,865.00 1968.00,902.00 1968.00,902.00 Z
+           M 227.00,899.00
+           C 227.00,899.00 226.00,896.00 226.00,896.00
+             226.00,896.00 225.00,902.00 225.00,902.00
+             225.00,902.00 227.00,900.00 227.00,900.00
+             229.33,902.60 231.68,901.99 235.00,902.04
+             235.00,902.04 267.00,902.04 267.00,902.04
+             267.00,902.04 273.00,902.04 273.00,902.04
+             280.12,902.37 279.00,901.11 279.00,886.00
+             279.00,886.00 279.00,832.00 279.00,832.00
+             279.00,832.00 279.00,602.00 279.00,602.00
+             279.00,602.00 279.00,236.00 279.00,236.00
+             279.01,229.27 278.71,223.34 287.00,222.04
+             287.00,222.04 293.00,222.04 293.00,222.04
+             293.00,222.04 370.00,222.04 370.00,222.04
+             370.00,222.04 670.00,222.04 670.00,222.04
+             670.00,222.04 1954.00,222.04 1954.00,222.04
+             1964.95,221.98 1962.11,220.42 1962.00,211.00
+             1962.00,211.00 1962.00,186.00 1962.00,186.00
+             1962.01,180.26 1964.89,173.00 1957.00,172.02
+             1957.00,172.02 1952.00,172.02 1952.00,172.02
+             1952.00,172.02 1871.00,172.02 1871.00,172.02
+             1871.00,172.02 1573.00,172.02 1573.00,172.02
+             1573.00,172.02 293.00,172.02 293.00,172.02
+             293.00,172.02 273.00,170.00 273.00,170.00
+             273.00,170.00 236.00,170.00 236.00,170.00
+             233.70,170.00 229.59,169.62 228.02,171.60
+             226.56,173.45 227.00,180.46 227.00,183.00
+             227.00,183.00 227.00,212.00 227.00,212.00
+             227.00,212.00 227.00,352.00 227.00,352.00
+             227.00,352.00 227.00,899.00 227.00,899.00 Z
+           M 225.00,171.00
+           C 225.00,171.00 225.00,178.00 225.00,178.00
+             225.00,178.00 225.00,171.00 225.00,171.00 Z
+           M 1288.00,345.46
+           C 1288.00,345.46 1276.00,347.83 1276.00,347.83
+             1270.82,348.35 1269.07,347.58 1263.00,348.81
+             1263.00,348.81 1253.00,351.91 1253.00,351.91
+             1253.00,351.91 1245.00,353.55 1245.00,353.55
+             1245.00,353.55 1238.00,356.54 1238.00,356.54
+             1238.00,356.54 1230.00,358.83 1230.00,358.83
+             1221.44,362.13 1205.01,371.58 1197.99,377.37
+             1186.71,386.68 1177.02,398.56 1171.12,412.00
+             1171.12,412.00 1168.94,419.00 1168.94,419.00
+             1168.94,419.00 1166.25,425.00 1166.25,425.00
+             1166.25,425.00 1164.45,435.00 1164.45,435.00
+             1164.45,435.00 1161.20,444.00 1161.20,444.00
+             1161.20,444.00 1161.20,453.00 1161.20,453.00
+             1160.27,462.44 1159.44,468.29 1161.20,478.00
+             1161.20,478.00 1164.60,487.00 1164.60,487.00
+             1164.60,487.00 1166.25,495.00 1166.25,495.00
+             1171.54,510.69 1182.62,528.15 1196.09,538.00
+             1203.16,543.17 1210.91,547.98 1219.00,551.37
+             1219.00,551.37 1225.00,553.37 1225.00,553.37
+             1225.00,553.37 1232.00,556.44 1232.00,556.44
+             1232.00,556.44 1242.00,558.10 1242.00,558.10
+             1246.12,559.27 1246.68,560.36 1252.00,561.38
+             1252.00,561.38 1261.00,562.39 1261.00,562.39
+             1261.00,562.39 1270.00,565.47 1270.00,565.47
+             1270.00,565.47 1283.00,567.45 1283.00,567.45
+             1286.41,568.48 1287.80,569.73 1292.00,570.53
+             1292.00,570.53 1302.00,571.55 1302.00,571.55
+             1306.00,572.58 1306.94,574.22 1313.00,575.38
+             1313.00,575.38 1323.00,576.22 1323.00,576.22
+             1323.00,576.22 1338.00,581.84 1338.00,581.84
+             1340.14,582.93 1342.07,584.47 1343.83,586.08
+             1348.32,590.21 1352.33,595.28 1354.45,601.00
+             1357.35,608.86 1359.73,613.04 1358.83,622.00
+             1358.26,627.69 1357.47,627.63 1355.07,632.17
+             1348.35,644.91 1348.83,642.83 1337.13,650.83
+             1332.85,653.76 1328.06,657.34 1323.00,658.79
+             1319.57,659.77 1303.07,660.99 1299.00,661.00
+             1289.29,661.02 1279.63,660.98 1270.00,659.57
+             1261.54,658.34 1262.56,657.14 1257.00,655.71
+             1257.00,655.71 1249.00,654.28 1249.00,654.28
+             1249.00,654.28 1243.00,651.27 1243.00,651.27
+             1243.00,651.27 1236.00,649.04 1236.00,649.04
+             1236.00,649.04 1217.00,638.68 1217.00,638.68
+             1208.49,633.11 1199.68,626.91 1192.28,619.92
+             1189.77,617.55 1186.05,612.92 1182.17,614.11
+             1179.91,614.81 1175.30,618.99 1173.41,620.65
+             1173.41,620.65 1160.85,630.24 1160.85,630.24
+             1160.85,630.24 1143.83,643.69 1143.83,643.69
+             1143.83,643.69 1134.25,650.85 1134.25,650.85
+             1132.42,652.36 1125.77,656.76 1125.17,658.22
+             1123.73,661.69 1128.56,665.16 1130.71,667.25
+             1139.13,675.41 1143.54,679.72 1153.00,686.92
+             1171.27,700.83 1187.36,710.26 1209.00,718.00
+             1209.00,718.00 1216.00,720.99 1216.00,720.99
+             1216.00,720.99 1225.00,722.79 1225.00,722.79
+             1225.00,722.79 1234.00,725.88 1234.00,725.88
+             1241.60,727.54 1243.84,726.55 1249.00,727.30
+             1256.20,728.34 1258.96,730.88 1269.00,730.91
+             1269.00,730.91 1297.00,730.91 1297.00,730.91
+             1297.00,730.91 1314.00,727.17 1314.00,727.17
+             1314.00,727.17 1332.00,725.80 1332.00,725.80
+             1332.00,725.80 1342.00,722.53 1342.00,722.53
+             1342.00,722.53 1352.00,721.29 1352.00,721.29
+             1352.00,721.29 1360.00,718.32 1360.00,718.32
+             1360.00,718.32 1367.00,716.67 1367.00,716.67
+             1367.00,716.67 1373.00,714.05 1373.00,714.05
+             1373.00,714.05 1380.00,711.57 1380.00,711.57
+             1385.77,708.84 1395.75,702.14 1400.83,698.15
+             1411.27,689.95 1424.38,671.15 1429.59,659.00
+             1429.59,659.00 1431.47,653.00 1431.47,653.00
+             1431.47,653.00 1434.28,647.00 1434.28,647.00
+             1434.28,647.00 1436.18,637.00 1436.18,637.00
+             1438.63,627.43 1439.98,630.19 1440.00,618.00
+             1440.00,618.00 1440.00,607.00 1440.00,607.00
+             1439.98,594.91 1438.78,598.76 1436.37,590.00
+             1436.37,590.00 1434.43,580.00 1434.43,580.00
+             1434.43,580.00 1431.49,574.00 1431.49,574.00
+             1431.49,574.00 1429.47,568.17 1429.47,568.17
+             1423.86,556.17 1417.57,547.12 1407.58,538.41
+             1395.47,527.87 1381.22,518.92 1366.00,513.84
+             1366.00,513.84 1359.00,512.16 1359.00,512.16
+             1359.00,512.16 1352.00,509.32 1352.00,509.32
+             1352.00,509.32 1326.00,503.15 1326.00,503.15
+             1326.00,503.15 1316.00,499.53 1316.00,499.53
+             1316.00,499.53 1307.00,498.31 1307.00,498.31
+             1307.00,498.31 1300.00,495.41 1300.00,495.41
+             1300.00,495.41 1286.00,493.67 1286.00,493.67
+             1286.00,493.67 1276.00,490.33 1276.00,490.33
+             1276.00,490.33 1269.00,489.32 1269.00,489.32
+             1269.00,489.32 1255.09,483.28 1255.09,483.28
+             1253.34,482.05 1252.28,480.66 1251.02,478.98
+             1248.33,475.43 1244.26,468.14 1242.84,463.91
+             1238.76,451.75 1244.30,439.58 1253.25,431.33
+             1257.02,427.86 1264.26,422.25 1269.00,420.57
+             1269.00,420.57 1281.00,418.37 1281.00,418.37
+             1288.05,416.38 1294.51,414.75 1302.00,415.04
+             1302.00,415.04 1316.00,416.39 1316.00,416.39
+             1316.00,416.39 1323.00,418.65 1323.00,418.65
+             1323.00,418.65 1335.00,420.42 1335.00,420.42
+             1335.00,420.42 1343.00,424.13 1343.00,424.13
+             1343.00,424.13 1349.00,425.57 1349.00,425.57
+             1353.88,427.29 1363.25,432.43 1368.01,435.10
+             1368.01,435.10 1386.27,447.18 1386.27,447.18
+             1388.24,448.72 1391.34,451.96 1394.00,451.27
+             1395.89,450.78 1403.16,443.11 1405.42,441.15
+             1405.42,441.15 1434.87,414.75 1434.87,414.75
+             1438.14,411.63 1446.57,406.14 1443.42,401.27
+             1441.79,398.74 1436.25,394.31 1433.73,392.25
+             1425.89,385.82 1417.87,380.29 1409.16,375.14
+             1409.16,375.14 1386.00,363.13 1386.00,363.13
+             1386.00,363.13 1380.00,361.10 1380.00,361.10
+             1380.00,361.10 1374.00,358.26 1374.00,358.26
+             1374.00,358.26 1366.00,356.33 1366.00,356.33
+             1366.00,356.33 1359.00,353.55 1359.00,353.55
+             1359.00,353.55 1351.00,352.32 1351.00,352.32
+             1342.51,350.36 1342.14,348.15 1330.00,348.00
+             1330.00,348.00 1288.00,345.46 1288.00,345.46 Z
+           M 876.00,346.21
+           C 876.00,346.21 865.00,347.91 865.00,347.91
+             859.14,348.31 856.31,347.73 850.00,349.35
+             850.00,349.35 842.00,352.22 842.00,352.22
+             842.00,352.22 835.00,353.84 835.00,353.84
+             805.93,363.49 781.81,379.31 761.93,402.75
+             756.95,408.63 743.97,428.25 740.62,435.09
+             740.62,435.09 734.74,449.00 734.74,449.00
+             731.89,455.24 728.78,461.38 726.80,468.00
+             726.80,468.00 725.22,476.00 725.22,476.00
+             725.22,476.00 722.49,484.00 722.49,484.00
+             722.49,484.00 720.48,495.00 720.48,495.00
+             720.48,495.00 718.60,501.00 718.60,501.00
+             717.05,506.89 717.07,512.97 717.00,519.00
+             717.00,519.00 716.00,532.00 716.00,532.00
+             716.00,532.00 716.00,549.00 716.00,549.00
+             716.00,549.00 717.00,562.00 717.00,562.00
+             717.07,568.28 716.80,573.84 718.62,580.00
+             718.62,580.00 720.65,586.00 720.65,586.00
+             720.65,586.00 722.67,596.00 722.67,596.00
+             722.67,596.00 725.15,602.00 725.15,602.00
+             725.15,602.00 726.96,610.00 726.96,610.00
+             731.21,622.06 737.55,634.13 743.93,645.17
+             761.72,675.98 775.39,690.26 805.83,708.77
+             813.59,713.50 817.98,714.97 826.00,718.51
+             826.00,718.51 832.00,721.31 832.00,721.31
+             832.00,721.31 839.00,722.64 839.00,722.64
+             839.00,722.64 847.00,725.77 847.00,725.77
+             847.00,725.77 863.00,727.44 863.00,727.44
+             870.64,728.63 878.18,730.97 886.00,730.97
+             893.95,730.97 901.28,728.40 909.00,727.30
+             909.00,727.30 921.00,726.72 921.00,726.72
+             932.91,725.29 930.47,724.05 937.00,722.53
+             937.00,722.53 946.00,720.99 946.00,720.99
+             946.00,720.99 953.00,718.01 953.00,718.01
+             953.00,718.01 959.00,716.32 959.00,716.32
+             969.60,712.24 979.78,706.13 989.15,699.74
+             1001.66,691.21 1013.84,681.37 1023.63,669.73
+             1023.63,669.73 1031.37,659.00 1031.37,659.00
+             1031.37,659.00 1036.74,652.00 1036.74,652.00
+             1036.74,652.00 1052.14,621.00 1052.14,621.00
+             1052.14,621.00 1054.32,613.00 1054.32,613.00
+             1054.32,613.00 1057.06,606.00 1057.06,606.00
+             1057.06,606.00 1058.54,599.00 1058.54,599.00
+             1058.54,599.00 1061.37,590.00 1061.37,590.00
+             1061.37,590.00 1063.17,573.00 1063.17,573.00
+             1063.94,566.16 1065.90,561.99 1066.00,554.00
+             1066.00,554.00 1066.00,520.00 1066.00,520.00
+             1065.98,509.41 1064.72,511.29 1063.32,503.00
+             1063.32,503.00 1061.54,489.00 1061.54,489.00
+             1061.54,489.00 1058.78,480.00 1058.78,480.00
+             1058.78,480.00 1057.06,472.00 1057.06,472.00
+             1057.06,472.00 1054.40,465.00 1054.40,465.00
+             1054.40,465.00 1052.39,457.00 1052.39,457.00
+             1052.39,457.00 1049.32,450.00 1049.32,450.00
+             1043.51,434.79 1036.04,419.85 1025.95,406.92
+             1010.88,387.59 992.04,373.45 970.00,363.12
+             970.00,363.12 964.00,360.95 964.00,360.95
+             964.00,360.95 958.00,358.25 958.00,358.25
+             958.00,358.25 951.00,356.55 951.00,356.55
+             951.00,356.55 943.00,353.53 943.00,353.53
+             943.00,353.53 936.00,352.52 936.00,352.52
+             929.01,351.06 928.06,348.17 914.00,348.00
+             914.00,348.00 882.00,346.21 882.00,346.21
+             882.00,346.21 876.00,346.21 876.00,346.21 Z
+           M 2090.00,589.00
+           C 2089.93,596.49 2085.50,607.29 2082.06,614.00
+             2072.79,632.14 2061.02,642.44 2043.00,651.11
+             2043.00,651.11 2037.00,654.29 2037.00,654.29
+             2037.00,654.29 2031.00,655.87 2031.00,655.87
+             2031.00,655.87 2024.00,658.87 2024.00,658.87
+             2024.00,658.87 2003.00,661.96 2003.00,661.96
+             1999.37,662.10 1982.41,660.04 1979.00,659.06
+             1979.00,659.06 1972.00,656.06 1972.00,656.06
+             1972.00,656.06 1965.00,653.87 1965.00,653.87
+             1948.06,646.21 1933.10,632.55 1923.34,616.72
+             1923.34,616.72 1912.87,596.00 1912.87,596.00
+             1912.87,596.00 1911.17,588.17 1911.17,588.17
+             1911.17,588.17 1908.41,581.96 1908.41,581.96
+             1906.63,574.93 1905.91,547.37 1906.00,539.00
+             1906.00,539.00 1907.00,526.00 1907.00,526.00
+             1907.09,518.20 1906.77,500.99 1908.41,494.00
+             1908.41,494.00 1911.45,486.00 1911.45,486.00
+             1911.45,486.00 1912.89,478.00 1912.89,478.00
+             1912.89,478.00 1916.56,471.00 1916.56,471.00
+             1925.53,452.31 1940.67,435.61 1959.17,425.89
+             1959.17,425.89 1964.00,423.86 1964.00,423.86
+             1964.00,423.86 1969.00,420.94 1969.00,420.94
+             1971.19,419.88 1972.79,419.72 1975.00,419.03
+             1984.53,416.05 1984.17,415.02 1995.00,415.00
+             1995.00,415.00 2013.00,415.00 2013.00,415.00
+             2023.48,415.13 2022.83,417.05 2030.00,419.20
+             2030.00,419.20 2036.91,420.72 2036.91,420.72
+             2036.91,420.72 2042.17,423.89 2042.17,423.89
+             2042.17,423.89 2048.00,426.48 2048.00,426.48
+             2057.12,431.69 2068.77,443.16 2074.49,452.00
+             2074.49,452.00 2085.32,472.00 2085.32,472.00
+             2085.32,472.00 2087.20,478.00 2087.20,478.00
+             2088.49,481.29 2089.96,486.43 2094.06,486.42
+             2098.87,486.40 2102.69,483.55 2107.00,482.00
+             2107.00,482.00 2118.00,477.66 2118.00,477.66
+             2118.00,477.66 2125.00,475.47 2125.00,475.47
+             2125.00,475.47 2145.00,466.95 2145.00,466.95
+             2145.00,466.95 2159.69,461.49 2159.69,461.49
+             2160.85,460.81 2161.33,460.16 2161.67,458.86
+             2162.50,455.65 2156.10,442.42 2154.33,439.00
+             2144.21,419.41 2134.31,404.00 2117.91,388.87
+             2104.15,376.18 2084.70,364.46 2067.00,358.48
+             2067.00,358.48 2059.00,356.41 2059.00,356.41
+             2059.00,356.41 2051.00,353.53 2051.00,353.53
+             2051.00,353.53 2042.00,352.18 2042.00,352.18
+             2042.00,352.18 2034.00,349.63 2034.00,349.63
+             2034.00,349.63 2018.00,348.00 2018.00,348.00
+             2018.00,348.00 1978.00,348.00 1978.00,348.00
+             1966.03,348.14 1965.74,350.28 1957.00,352.32
+             1957.00,352.32 1949.00,353.85 1949.00,353.85
+             1949.00,353.85 1942.00,356.76 1942.00,356.76
+             1900.70,370.95 1870.67,400.37 1850.88,439.00
+             1850.88,439.00 1845.68,450.00 1845.68,450.00
+             1845.68,450.00 1843.73,456.00 1843.73,456.00
+             1843.73,456.00 1840.72,462.00 1840.72,462.00
+             1840.72,462.00 1839.28,469.00 1839.28,469.00
+             1839.28,469.00 1835.57,477.00 1835.57,477.00
+             1835.57,477.00 1834.37,486.00 1834.37,486.00
+             1833.44,489.28 1831.81,491.07 1831.21,495.00
+             1831.21,495.00 1829.79,515.00 1829.79,515.00
+             1829.79,515.00 1828.17,522.00 1828.17,522.00
+             1826.79,529.57 1826.99,533.50 1827.00,541.00
+             1827.01,548.91 1828.77,553.66 1829.79,561.00
+             1829.79,561.00 1831.41,582.00 1831.41,582.00
+             1831.41,582.00 1834.59,590.00 1834.59,590.00
+             1834.59,590.00 1835.57,599.00 1835.57,599.00
+             1835.57,599.00 1839.28,607.00 1839.28,607.00
+             1839.28,607.00 1840.87,614.91 1840.87,614.91
+             1840.87,614.91 1844.13,621.09 1844.13,621.09
+             1844.13,621.09 1845.70,626.83 1845.70,626.83
+             1845.70,626.83 1848.10,631.17 1848.10,631.17
+             1848.10,631.17 1850.00,636.96 1850.00,636.96
+             1850.00,636.96 1860.54,656.58 1860.54,656.58
+             1876.10,681.72 1900.23,701.95 1927.00,714.03
+             1927.00,714.03 1944.00,721.28 1944.00,721.28
+             1944.00,721.28 1952.00,722.63 1952.00,722.63
+             1952.00,722.63 1959.00,725.37 1959.00,725.37
+             1964.15,726.88 1970.66,726.94 1976.00,727.00
+             1976.00,727.00 2000.00,730.00 2000.00,730.00
+             2012.36,730.14 2014.85,728.66 2026.00,727.29
+             2026.00,727.29 2045.00,725.83 2045.00,725.83
+             2045.00,725.83 2054.00,722.79 2054.00,722.79
+             2054.00,722.79 2063.00,721.15 2063.00,721.15
+             2063.00,721.15 2069.00,718.51 2069.00,718.51
+             2085.87,711.48 2101.65,703.37 2115.41,690.96
+             2132.47,675.58 2143.29,658.09 2153.78,638.00
+             2153.78,638.00 2159.58,625.00 2159.58,625.00
+             2160.55,623.00 2162.19,620.71 2161.37,618.37
+             2159.65,613.48 2150.46,612.85 2146.42,610.64
+             2139.92,607.08 2141.23,608.74 2136.00,606.61
+             2136.00,606.61 2130.00,603.70 2130.00,603.70
+             2130.00,603.70 2124.00,602.13 2124.00,602.13
+             2124.00,602.13 2117.00,598.72 2117.00,598.72
+             2117.00,598.72 2110.00,596.93 2110.00,596.93
+             2103.92,594.51 2096.32,589.71 2090.00,589.00 Z
+           M 393.00,354.00
+           C 392.25,355.85 391.68,356.94 391.50,359.00
+             391.50,359.00 392.00,386.00 392.00,386.00
+             392.00,386.00 392.00,457.00 392.00,457.00
+             392.00,457.00 392.00,705.00 392.00,705.00
+             391.98,715.43 388.68,720.80 399.00,721.00
+             399.00,721.00 454.00,721.00 454.00,721.00
+             455.99,721.00 459.81,721.23 461.40,719.98
+             463.10,718.63 462.96,715.95 463.00,714.00
+             463.00,714.00 463.00,693.00 463.00,693.00
+             463.00,693.00 463.00,602.00 463.00,602.00
+             463.00,599.37 462.78,595.50 464.17,593.23
+             467.13,588.39 481.64,590.00 487.00,590.00
+             487.00,590.00 561.00,590.00 561.00,590.00
+             573.92,589.98 570.11,587.80 579.00,585.68
+             579.00,585.68 585.91,584.58 585.91,584.58
+             585.91,584.58 592.09,581.47 592.09,581.47
+             592.09,581.47 597.83,579.61 597.83,579.61
+             597.83,579.61 602.17,577.03 602.17,577.03
+             606.45,574.62 610.62,572.55 614.58,569.55
+             629.39,558.35 642.92,539.84 650.71,523.00
+             650.71,523.00 652.80,517.00 652.80,517.00
+             652.80,517.00 655.58,511.00 655.58,511.00
+             655.58,511.00 657.42,504.17 657.42,504.17
+             658.52,501.34 660.05,500.30 660.86,496.99
+             660.86,496.99 660.86,488.00 660.86,488.00
+             660.86,488.00 662.00,475.00 662.00,475.00
+             662.00,475.00 661.00,455.00 661.00,455.00
+             660.79,437.03 659.76,445.16 657.18,435.91
+             657.18,435.91 655.58,429.00 655.58,429.00
+             655.58,429.00 652.79,423.00 652.79,423.00
+             642.27,398.20 621.62,378.95 598.00,366.50
+             592.75,363.73 588.81,361.31 583.00,359.40
+             577.58,357.62 556.97,355.01 551.00,355.00
+             551.00,355.00 448.00,355.00 448.00,355.00
+             435.10,355.00 403.85,355.94 393.00,354.00 Z
+           M 1501.51,355.04
+           C 1498.10,358.88 1499.94,363.21 1500.00,368.00
+             1500.00,368.00 1500.00,407.00 1500.00,407.00
+             1499.99,410.89 1497.89,421.68 1502.30,423.08
+             1502.30,423.08 1511.00,423.08 1511.00,423.08
+             1511.00,423.08 1590.00,423.08 1590.00,423.08
+             1599.37,423.01 1603.93,423.30 1604.00,434.00
+             1604.00,434.00 1604.00,490.00 1604.00,490.00
+             1604.00,490.00 1604.00,713.00 1604.00,713.00
+             1604.02,724.48 1606.04,721.12 1616.00,721.00
+             1616.00,721.00 1658.00,721.00 1658.00,721.00
+             1661.60,721.01 1672.11,722.72 1674.31,720.35
+             1675.87,718.68 1675.00,706.03 1675.00,703.00
+             1675.00,703.00 1675.00,654.00 1675.00,654.00
+             1675.00,654.00 1675.00,436.00 1675.00,436.00
+             1675.00,433.66 1674.87,430.18 1675.74,428.04
+             1678.63,420.93 1691.61,423.00 1698.00,423.00
+             1698.00,423.00 1767.00,423.00 1767.00,423.00
+             1778.07,423.02 1779.93,425.95 1780.00,416.00
+             1780.00,416.00 1780.00,363.00 1780.00,363.00
+             1780.00,360.86 1780.38,356.46 1778.40,355.04
+             1777.10,354.22 1769.17,355.00 1767.00,355.04
+             1767.00,355.04 1716.00,355.04 1716.00,355.04
+             1716.00,355.04 1568.00,355.04 1568.00,355.04
+             1568.00,355.04 1522.00,355.04 1522.00,355.04
+             1522.00,355.04 1501.51,355.04 1501.51,355.04 Z
+           M 3036.00,721.00
+           C 3045.68,722.25 3042.68,721.10 3051.00,721.00
+             3051.00,721.00 3092.00,721.00 3092.00,721.00
+             3095.22,721.01 3104.38,722.54 3106.23,720.40
+             3107.79,718.60 3107.00,706.06 3107.00,703.00
+             3107.00,703.00 3107.00,654.00 3107.00,654.00
+             3107.00,654.00 3107.00,436.00 3107.00,436.00
+             3107.00,433.50 3106.81,430.30 3108.02,428.05
+             3111.80,421.07 3126.01,423.00 3133.00,423.00
+             3133.00,423.00 3187.00,423.00 3187.00,423.00
+             3187.00,423.00 3213.10,423.00 3213.10,423.00
+             3214.08,416.14 3213.08,416.44 3213.10,410.00
+             3213.10,410.00 3213.10,370.00 3213.10,370.00
+             3213.10,370.00 3213.10,362.00 3213.10,362.00
+             3214.06,352.34 3206.42,354.92 3200.00,355.00
+             3200.00,355.00 3150.00,355.00 3150.00,355.00
+             3150.00,355.00 2944.00,355.00 2944.00,355.00
+             2932.93,354.98 2931.07,352.05 2931.00,362.00
+             2931.00,362.00 2931.00,415.00 2931.00,415.00
+             2931.00,416.90 2930.77,420.89 2932.02,422.36
+             2933.51,424.12 2941.44,423.00 2944.00,423.00
+             2944.00,423.00 3023.00,423.00 3023.00,423.00
+             3032.23,423.01 3035.93,423.77 3036.00,434.00
+             3036.00,434.00 3036.00,492.00 3036.00,492.00
+             3036.00,492.00 3036.00,721.00 3036.00,721.00 Z
+           M 3705.43,355.01
+           C 3704.68,355.86 3704.55,355.36 3703.74,357.15
+             3702.51,359.85 3703.00,375.94 3703.00,380.00
+             3703.00,380.00 3703.00,447.00 3703.00,447.00
+             3703.00,447.00 3703.00,713.00 3703.00,713.00
+             3703.00,715.24 3702.59,719.33 3704.57,720.91
+             3706.36,722.15 3715.94,720.94 3719.00,720.91
+             3719.00,720.91 3732.00,722.00 3732.00,722.00
+             3732.00,722.00 3757.00,722.00 3757.00,722.00
+             3757.00,722.00 3937.00,722.00 3937.00,722.00
+             3937.00,722.00 3954.00,721.00 3954.00,721.00
+             3954.00,721.00 3980.00,721.00 3980.00,721.00
+             3982.56,721.00 3992.55,722.74 3993.09,719.68
+             3993.44,717.75 3990.49,713.82 3989.51,712.00
+             3989.51,712.00 3976.15,689.83 3976.15,689.83
+             3976.15,689.83 3964.32,669.00 3964.32,669.00
+             3964.32,669.00 3957.57,658.00 3957.57,658.00
+             3957.57,658.00 3951.82,646.96 3951.82,646.96
+             3951.82,646.96 3947.06,640.01 3947.06,640.01
+             3947.06,640.01 3940.91,628.28 3940.91,628.28
+             3940.91,628.28 3937.30,622.96 3937.30,622.96
+             3937.30,622.96 3931.97,613.28 3931.97,613.28
+             3931.97,613.28 3926.52,605.00 3926.52,605.00
+             3926.52,605.00 3913.32,581.16 3913.32,581.16
+             3912.09,578.68 3909.71,576.70 3910.01,574.07
+             3910.62,568.63 3919.06,566.29 3923.00,563.97
+             3934.65,557.11 3945.43,550.02 3954.59,539.91
+             3962.53,531.15 3970.18,521.27 3974.30,510.00
+             3974.30,510.00 3975.98,503.00 3975.98,503.00
+             3978.78,493.61 3979.98,494.98 3980.00,484.00
+             3980.00,484.00 3980.00,453.00 3980.00,453.00
+             3979.90,444.37 3978.53,443.48 3976.43,436.00
+             3973.20,424.52 3977.24,427.76 3967.45,411.00
+             3967.45,411.00 3963.76,404.00 3963.76,404.00
+             3954.94,389.91 3942.08,378.81 3928.00,370.26
+             3928.00,370.26 3916.00,363.27 3916.00,363.27
+             3916.00,363.27 3909.00,361.38 3909.00,361.38
+             3909.00,361.38 3900.00,358.04 3900.00,358.04
+             3894.58,356.70 3892.87,357.30 3888.00,356.83
+             3888.00,356.83 3871.00,355.01 3871.00,355.01
+             3871.00,355.01 3854.00,355.01 3854.00,355.01
+             3854.00,355.01 3782.00,355.01 3782.00,355.01
+             3782.00,355.01 3729.00,355.01 3729.00,355.01
+             3729.00,355.01 3705.43,355.01 3705.43,355.01 Z
+           M 2668.00,357.00
+           C 2668.00,357.00 2669.00,371.00 2669.00,371.00
+             2669.00,371.00 2669.00,482.00 2669.00,482.00
+             2669.00,482.00 2669.00,704.00 2669.00,704.00
+             2669.00,704.00 2668.00,721.00 2668.00,721.00
+             2668.00,721.00 2692.00,721.00 2692.00,721.00
+             2692.00,721.00 2740.00,721.00 2740.00,721.00
+             2740.00,721.00 2890.00,721.00 2890.00,721.00
+             2892.69,721.00 2901.51,722.33 2902.96,720.39
+             2903.81,719.09 2903.01,712.10 2902.96,710.00
+             2902.96,710.00 2902.96,666.00 2902.96,666.00
+             2903.03,659.85 2904.33,657.91 2902.00,652.00
+             2894.14,653.91 2864.09,653.00 2854.00,653.00
+             2854.00,653.00 2758.00,653.00 2758.00,653.00
+             2751.54,653.01 2742.52,654.69 2739.60,646.98
+             2738.89,645.11 2739.00,642.04 2739.00,640.00
+             2739.00,640.00 2739.00,566.00 2739.00,566.00
+             2739.00,566.00 2739.00,370.00 2739.00,370.00
+             2739.02,358.41 2741.87,356.02 2730.00,356.00
+             2716.44,355.97 2678.99,355.03 2668.00,357.00 Z
+           M 4091.00,721.00
+           C 4097.32,722.80 4110.84,722.00 4118.00,722.00
+             4118.00,722.00 4169.00,722.00 4169.00,722.00
+             4169.00,722.00 4336.00,722.00 4336.00,722.00
+             4338.47,722.00 4343.19,722.55 4344.12,719.69
+             4344.12,719.69 4344.12,702.00 4344.12,702.00
+             4344.00,690.19 4343.13,666.44 4345.00,656.00
+             4339.22,653.45 4338.07,654.93 4332.00,655.00
+             4332.00,655.00 4306.00,655.00 4306.00,655.00
+             4306.00,655.00 4214.00,655.00 4214.00,655.00
+             4203.01,654.98 4198.06,653.03 4198.00,641.00
+             4198.00,641.00 4198.00,581.00 4198.00,581.00
+             4198.00,578.59 4197.87,575.24 4198.74,573.00
+             4202.10,564.36 4216.43,567.00 4224.00,567.00
+             4224.00,567.00 4306.00,567.00 4306.00,567.00
+             4314.64,566.98 4314.98,566.64 4315.00,558.00
+             4315.00,558.00 4315.00,504.00 4315.00,504.00
+             4315.00,504.00 4211.00,504.00 4211.00,504.00
+             4201.94,503.99 4198.14,503.15 4198.00,493.00
+             4198.00,493.00 4198.00,437.00 4198.00,437.00
+             4198.00,434.50 4197.81,431.30 4199.02,429.05
+             4202.88,421.91 4218.81,424.00 4226.00,424.00
+             4226.00,424.00 4315.00,424.00 4315.00,424.00
+             4318.10,424.00 4327.27,425.51 4328.99,423.26
+             4330.08,421.78 4329.03,415.28 4328.99,413.00
+             4328.99,413.00 4328.99,371.00 4328.99,371.00
+             4329.02,359.63 4332.34,356.16 4323.00,356.00
+             4323.00,356.00 4275.00,356.00 4275.00,356.00
+             4275.00,356.00 4101.00,356.00 4101.00,356.00
+             4099.01,356.00 4095.19,355.77 4093.60,357.02
+             4091.05,359.04 4092.00,373.32 4092.00,377.00
+             4092.00,377.00 4092.00,441.00 4092.00,441.00
+             4092.00,441.00 4092.00,627.00 4092.00,627.00
+             4092.00,627.00 4092.00,686.00 4092.00,686.00
+             4092.00,696.40 4092.76,711.19 4091.00,721.00 Z
+           M 2247.00,357.00
+           C 2247.00,357.00 2247.00,529.00 2247.00,529.00
+             2247.00,529.00 2246.00,546.00 2246.00,546.00
+             2246.00,546.00 2246.00,577.00 2246.00,577.00
+             2246.03,593.74 2249.38,594.84 2250.70,604.00
+             2250.70,604.00 2251.39,615.00 2251.39,615.00
+             2251.39,615.00 2254.90,624.00 2254.90,624.00
+             2254.90,624.00 2256.68,631.83 2256.68,631.83
+             2256.68,631.83 2259.32,637.09 2259.32,637.09
+             2259.32,637.09 2261.13,643.00 2261.13,643.00
+             2261.13,643.00 2264.50,649.00 2264.50,649.00
+             2278.68,675.98 2299.81,697.22 2327.00,711.25
+             2327.00,711.25 2333.00,713.87 2333.00,713.87
+             2333.00,713.87 2348.00,721.28 2348.00,721.28
+             2348.00,721.28 2355.00,722.87 2355.00,722.87
+             2355.00,722.87 2362.00,725.79 2362.00,725.79
+             2367.32,727.28 2370.85,726.63 2375.00,727.32
+             2383.15,728.69 2383.52,730.95 2395.00,731.00
+             2395.00,731.00 2403.00,731.00 2403.00,731.00
+             2412.78,730.88 2414.05,728.48 2421.00,727.32
+             2425.34,726.60 2427.67,727.52 2434.00,725.96
+             2434.00,725.96 2443.00,722.63 2443.00,722.63
+             2443.00,722.63 2450.00,721.13 2450.00,721.13
+             2450.00,721.13 2466.00,713.82 2466.00,713.82
+             2485.12,704.64 2498.52,694.70 2512.65,678.71
+             2518.88,671.67 2524.50,663.66 2529.30,655.58
+             2529.30,655.58 2531.87,650.28 2531.87,650.28
+             2531.87,650.28 2534.59,645.91 2534.59,645.91
+             2534.59,645.91 2536.38,641.17 2536.38,641.17
+             2536.38,641.17 2539.30,635.91 2539.30,635.91
+             2539.30,635.91 2540.70,631.00 2540.70,631.00
+             2540.70,631.00 2544.43,623.00 2544.43,623.00
+             2544.43,623.00 2545.33,611.00 2545.33,611.00
+             2546.72,602.98 2548.98,605.71 2549.00,593.00
+             2549.00,593.00 2549.00,533.00 2549.00,533.00
+             2549.00,533.00 2549.00,371.00 2549.00,371.00
+             2549.02,359.31 2552.39,357.07 2542.00,357.00
+             2542.00,357.00 2487.00,357.00 2487.00,357.00
+             2487.00,357.00 2472.00,358.00 2472.00,358.00
+             2472.00,358.00 2327.00,358.00 2327.00,358.00
+             2327.00,358.00 2310.00,357.00 2310.00,357.00
+             2310.00,357.00 2247.00,357.00 2247.00,357.00 Z
+           M 3282.00,357.00
+           C 3282.00,357.00 3282.00,529.00 3282.00,529.00
+             3282.00,529.00 3281.00,546.00 3281.00,546.00
+             3281.00,546.00 3281.00,577.00 3281.00,577.00
+             3281.03,593.74 3284.38,594.84 3285.70,604.00
+             3285.70,604.00 3286.39,615.00 3286.39,615.00
+             3286.39,615.00 3289.90,624.00 3289.90,624.00
+             3289.90,624.00 3291.68,631.83 3291.68,631.83
+             3291.68,631.83 3294.32,637.09 3294.32,637.09
+             3294.32,637.09 3296.13,643.00 3296.13,643.00
+             3296.13,643.00 3299.50,649.00 3299.50,649.00
+             3313.68,675.98 3334.81,697.22 3362.00,711.25
+             3362.00,711.25 3368.00,713.87 3368.00,713.87
+             3368.00,713.87 3383.00,721.28 3383.00,721.28
+             3383.00,721.28 3390.00,722.87 3390.00,722.87
+             3390.00,722.87 3397.00,725.79 3397.00,725.79
+             3402.32,727.28 3405.85,726.63 3410.00,727.32
+             3418.15,728.69 3418.52,730.95 3430.00,731.00
+             3430.00,731.00 3438.00,731.00 3438.00,731.00
+             3447.78,730.88 3449.05,728.48 3456.00,727.32
+             3460.34,726.60 3462.67,727.52 3469.00,725.96
+             3469.00,725.96 3478.00,722.63 3478.00,722.63
+             3478.00,722.63 3485.00,721.13 3485.00,721.13
+             3485.00,721.13 3501.00,713.82 3501.00,713.82
+             3520.12,704.64 3533.52,694.70 3547.65,678.71
+             3553.88,671.67 3559.50,663.66 3564.30,655.58
+             3564.30,655.58 3566.87,650.28 3566.87,650.28
+             3566.87,650.28 3569.59,645.91 3569.59,645.91
+             3569.59,645.91 3571.38,641.17 3571.38,641.17
+             3571.38,641.17 3574.30,635.91 3574.30,635.91
+             3574.30,635.91 3575.70,631.00 3575.70,631.00
+             3575.70,631.00 3579.43,623.00 3579.43,623.00
+             3579.43,623.00 3580.33,611.00 3580.33,611.00
+             3581.72,602.98 3583.98,605.71 3584.00,593.00
+             3584.00,593.00 3584.00,533.00 3584.00,533.00
+             3584.00,533.00 3584.00,371.00 3584.00,371.00
+             3584.02,359.31 3587.39,357.07 3577.00,357.00
+             3577.00,357.00 3522.00,357.00 3522.00,357.00
+             3522.00,357.00 3507.00,358.00 3507.00,358.00
+             3507.00,358.00 3362.00,358.00 3362.00,358.00
+             3362.00,358.00 3345.00,357.00 3345.00,357.00
+             3345.00,357.00 3282.00,357.00 3282.00,357.00 " fill="none" stroke="black" stroke-width="12"></path>
+</g>
+</svg>
+</a>
+</div>
+<nav aria-label="Main navigation" id="desktop-nav">
+<ul>
+<li>
+<button aria-expanded="false" data-module="latest">
+              Latest <span aria-hidden="true" class="chevron"></span>
+</button>
+</li>
+<li>
+<button aria-expanded="false" data-module="live">
+              Live <span aria-hidden="true" class="chevron"></span>
+</button>
+</li>
+<li>
+<button aria-expanded="false" data-module="listen">
+              Listen <span aria-hidden="true" class="chevron"></span>
+</button>
+</li>
+</ul>
+</nav>
+<button aria-controls="mobile-drawer" aria-expanded="false" aria-label="Open menu" id="mobile-toggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+<!-- ── MOBILE DRAWER ─────────────────────────────────────────── -->
+<nav aria-hidden="true" aria-label="Mobile navigation" id="mobile-drawer">
+<div class="drawer-group">
+<div class="drawer-label">Navigate</div>
+<a href="/whats-new.html">What's New?</a>
+<a href="/contact.html">Contact</a>
+<a href="/support.html">Support Us</a>
+</div>
+<div class="drawer-group">
+<div class="drawer-label">Music</div>
+<a href="https://postculture.bandcamp.com/album/pineapple" rel="noopener" target="_blank">Pineapple</a>
+<a href="https://postculture.bandcamp.com/album/four-songs" rel="noopener" target="_blank">Four Songs</a>
+<a href="https://postculture.bandcamp.com/album/-" rel="noopener" target="_blank">Postculture</a>
+<a href="https://postculture.bandcamp.com/album/avadance" rel="noopener" target="_blank">Avadance</a>
+<a href="https://postculture.bandcamp.com/track/call-my-name" rel="noopener" target="_blank">Call My Name</a>
+<a href="https://postculture.bandcamp.com/track/back-to-basics" rel="noopener" target="_blank">Back to Basics</a>
+<a href="https://postculture.bandcamp.com/track/indigo" rel="noopener" target="_blank">Indigo</a>
+</div>
+<div class="drawer-group">
+<div class="drawer-label">Links</div>
+<a href="https://postculture.bandcamp.com/merch" rel="noopener" target="_blank">Merch</a>
+<a href="https://postculturemusic.bsky.social" rel="noopener" target="_blank">Bluesky</a>
+<a href="https://twitter.com/PostcultureUK" rel="noopener" target="_blank">FKA Twitter</a>
+</div>
+</nav>
+<main>
+<!-- ── 404 ───────────────────────────────────────────────────── -->
+<div id="error-404" role="main" aria-labelledby="error-title">
+<div class="error-code" id="error-title">404</div>
+<div class="error-message">Page not found</div>
+<a class="return-home" href="https://postculturemusic.com">Return home</a>
+</div>
+<!-- ── PAGE MODULES ──────────────────────────────────────────────
+     All module content has been stripped out for the temporary
+     release. Buttons that open these are disabled (see CSS), and
+     none of them carry an "active" class, so they stay collapsed
+     and invisible. Full content to be restored on album release. -->
+<div class="page-module" data-module="latest"></div>
+<div class="page-module" data-module="contact"></div>
+<div class="page-module" data-module="live"></div>
+<div class="page-module" data-module="about" id="module-about"></div>
+<div class="page-module" data-module="listen"></div>
+<div class="page-module" data-module="pastculture"></div>
+<div class="page-module" data-module="store" id="module-store"></div>
+</main>
+<!-- ── MUSIC MODULE ──────────────────────────────────────────── -->
+<div id="module-wrap">
+<div id="music-module">
+<div id="module-buttons">
+<button aria-label="Play" class="mm-btn" id="btn-playpause">
+<span id="play-icon">▶</span>
+<span id="stop-icon" style="display:none">■</span>
+</button>
+<button aria-label="Volume up" class="mm-btn vol-btn" id="btn-vol-up">+</button>
+<button aria-label="Volume down" class="mm-btn vol-btn" id="btn-vol-down">−</button>
+<button aria-label="Key" class="mm-btn" data-mode="4" id="btn-key">V</button>
+</div>
+</div>
+<button aria-expanded="true" aria-label="Collapse module" id="module-tab">
+<svg fill="none" height="7" viewbox="0 0 12 7" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1L6 6L11 1" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</button>
+</div>
+<!-- ── FOOTER ───────────────────────────────────────────────── -->
+<footer id="site-footer">
+<div class="footer-inner">
+<!-- Row 1: Social icons — 5-column grid -->
+<div class="footer-social">
+<!-- Headphones = Streaming -->
+<div class="footer-social-cell">
+<button aria-label="Streaming" class="footer-social-icon" data-popup="popup-streaming">
+<svg role="img" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1C7.029 1 3 5.029 3 10v4a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5.07A7.01 7.01 0 0 1 12 3a7.01 7.01 0 0 1 6.93 7H17a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-4c0-4.971-4.029-9-9-9z"></path></svg>
+<span class="footer-social-label">STREAMING</span>
+</button>
+<div class="icon-popup align-left" id="popup-streaming">
+<a href="https://postculture.bandcamp.com" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"></path></svg>
+              Bandcamp
+            </a>
+<a href="https://music.apple.com/gb/artist/postculture/1051890449" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg>
+              Apple Music
+            </a>
+<a href="https://music.amazon.co.uk/artists/B0173YYPHO/postculture" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.734 1.767-2.962 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095V6.41c0-.677.051-1.478-.344-2.064-.345-.528-.995-.747-1.57-.747-1.064 0-2.015.547-2.248 1.678-.047.254-.231.504-.484.517l-2.718-.291c-.23-.051-.482-.238-.416-.591C7.787 2.645 10.4 1.5 12.757 1.5c1.205 0 2.78.32 3.731 1.231C17.745 3.888 17.617 5.5 17.617 7.24v4.187c0 1.258.522 1.813 1.014 2.492.172.243.211.534-.01.713l-1.477 1.163zm3.083 3.214C18.72 22.5 15.139 24 12.001 24 7.738 24 3.896 22.378 1.046 19.677c-.23-.215-.025-.508.254-.341 2.971 1.73 6.648 2.771 10.444 2.771 2.56 0 5.38-.531 7.975-1.632.391-.168.719.256.508.524zm.922-1.047c-.316-.404-2.089-.19-2.886-.096-.243.03-.28-.181-.061-.334 1.414-.994 3.731-.707 4.004-.374.271.336-.074 2.656-1.399 3.765-.203.17-.398.079-.307-.145.299-.749.967-2.42.649-2.816z"></path></svg>
+              Amazon Music
+            </a>
+<a href="https://www.deezer.com/en/artist/9098120" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.81 11.283H24v2.219h-5.19zm0-3.996H24v2.22h-5.19zM18.81 19.278H24V21.5h-5.19zM18.81 15.28H24v2.219h-5.19zM12.52 19.278h5.19V21.5h-5.19zM6.23 19.278h5.19V21.5H6.23zM0 19.278h5.19V21.5H0zm12.52-3.998h5.19v2.219h-5.19zm0-3.997h5.19v2.219h-5.19zm-6.29 7.995h5.19v2.219H6.23z"></path></svg>
+              Deezer
+            </a>
+<a href="https://open.spotify.com/artist/1FaFNt0lgUOHmqwnGeTYZM" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"></path></svg>
+              Spotify
+            </a>
+<a href="https://soundcloud.com/postculture" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.56 8.87V17h8.76c1.04-.01 1.68-.69 1.68-1.56 0-.86-.64-1.57-1.68-1.57-.13 0-.25.01-.37.04.02-.13.03-.26.03-.4 0-1.66-1.35-3-3.01-3-.56 0-1.08.15-1.53.42-.31-1.33-1.49-2.33-2.88-2.06zm-.88-.01c-.2 0-.37.16-.37.36V17h.96V8.86c-.12-.1-.24-.16-.36-.16-.08 0-.17.06-.23.16zm-1.63.78c-.2 0-.36.15-.36.35v6.99h.96V9.72c0-.2-.16-.35-.36-.35h-.24zm-1.64.46c-.2 0-.36.15-.36.35v6.53h.96V10.1c0-.08-.03-.15-.07-.21a.36.36 0 0 0-.29-.15c-.08 0-.15.03-.24.1v.06zm-1.64.47c-.19 0-.35.16-.35.35v6.06h.95v-6.06c0-.19-.16-.35-.35-.35h-.25zm-1.6.01c-.2 0-.37.15-.37.35V16c.08.59.51.99 1 .99s.92-.4 1-.99V10.5c0-.2-.16-.35-.36-.35H3.77zm-1.61.01c-.2 0-.36.16-.36.36V16c.06.6.5 1 .98 1s.93-.4.99-1V10.5c0-.08-.03-.16-.07-.22a.35.35 0 0 0-.29-.14c-.08 0-.17.03-.25.08v-.08zm-1.6.04c-.17 0-.32.1-.35.28V16c.04.62.5 1 .98 1 .49 0 .93-.38.98-1v-5.16c-.05-.17-.2-.28-.37-.28h-.24z"></path></svg>
+              SoundCloud
+            </a>
+<a href="https://tidal.com/artist/7321436" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004zM8.008 15.985l-4.004-4.004L0 15.985 4.004 19.99zm4.004-4.004l4.003 4.004 4.004-4.004L16.01 7.98z"></path></svg>
+              Tidal
+            </a>
+<a href="https://music.youtube.com/channel/UCWeDrF3xm4mp4WP5BjoLx7g" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+              YouTube Music
+            </a>
+</div>
+</div>
+<!-- Instagram = Socials -->
+<div class="footer-social-cell">
+<button aria-label="Instagram" class="footer-social-icon" data-popup="popup-socials">
+<svg role="img" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"></path></svg>
+<span class="footer-social-label">SOCIALS</span>
+</button>
+<div class="icon-popup align-left" id="popup-socials">
+<a href="https://bsky.app/profile/postculturemusic.bsky.social" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"></path></svg>
+              Bluesky
+            </a>
+<a href="https://x.com/PostcultureUK" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
+              FKA Twitter
+            </a>
+<a href="https://instagram.com/postculture/" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"></path></svg>
+              Instagram
+            </a>
+</div>
+</div>
+<!-- Ko-fi = Support -->
+<div class="footer-social-cell">
+<button aria-label="Ko-fi" class="footer-social-icon" data-popup="popup-support">
+<svg role="img" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.638-.885-.671-2.161.182-3.108.852-.946 2.111-1.012 3.164-.36.234.143.435.31.616.498l.28.262c.143.14.281.282.423.41.397.373.747.59 1.011.562.264-.028.561-.208.88-.538.14-.15.278-.295.418-.434l.275-.292c.2-.196.418-.375.666-.526.985-.615 2.216-.56 3.063.484.847 1.02.792 2.26-.015 3.192z"></path></svg>
+<span class="footer-social-label">SUPPORT</span>
+</button>
+<div class="icon-popup align-center" id="popup-support">
+<a href="https://ko-fi.com/postculture" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.638-.885-.671-2.161.182-3.108.852-.946 2.111-1.012 3.164-.36.234.143.435.31.616.498l.28.262c.143.14.281.282.423.41.397.373.747.59 1.011.562.264-.028.561-.208.88-.538.14-.15.278-.295.418-.434l.275-.292c.2-.196.418-.375.666-.526.985-.615 2.216-.56 3.063.484.847 1.02.792 2.26-.015 3.192z"></path></svg>
+              Ko-fi
+            </a>
+</div>
+</div>
+<!-- TikTok -->
+<div class="footer-social-cell">
+<button aria-label="TikTok" class="footer-social-icon" data-popup="popup-tiktok">
+<svg role="img" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg>
+<span class="footer-social-label">TIKTOK</span>
+</button>
+<div class="icon-popup align-right" id="popup-tiktok">
+<a href="https://www.tiktok.com/@postculture" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg>
+              @Postculture
+            </a>
+</div>
+</div>
+<!-- YouTube -->
+<div class="footer-social-cell">
+<button aria-label="YouTube" class="footer-social-icon" data-popup="popup-youtube">
+<svg role="img" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+<span class="footer-social-label">YOUTUBE</span>
+</button>
+<div class="icon-popup align-right" id="popup-youtube">
+<a href="https://www.youtube.com/@PostcultureUK" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+              @PostcultureUK
+            </a>
+</div>
+</div>
+</div>
+<!-- Row 2: #PCFAMILY / CONTACT / PASTCULTURE -->
+<div class="footer-nav-row">
+<div class="footer-nav-btn-wrap" id="about-wrap">
+<button class="footer-nav-btn" id="about-btn">ABOUT <span class="footer-chevron"></span></button>
+</div>
+<div class="footer-nav-btn-wrap" id="store-wrap">
+<button class="footer-nav-btn" id="store-btn" style="font-size:17px;">
+<svg height="16" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12zm-7-8c-1.66 0-3-1.34-3-3H7c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z"></path></svg>
+            STORE <span class="footer-chevron"></span>
+</button>
+</div>
+<div class="footer-nav-btn-wrap" id="contact-wrap">
+<button class="footer-nav-btn" id="contact-btn">CONTACT <span class="footer-chevron"></span></button>
+</div>
+</div>
+<!-- Line separator -->
+<div class="footer-divider"></div>
+<!-- Row 4: Credits -->
+<div class="footer-bottom">
+<p class="footer-credits-left">Logo by <a href="https://linktr.ee/lauramyers" rel="noopener" target="_blank">Laura Myers</a></p>
+<p class="footer-copyright">© <span id="year"></span> POSTCULTURE</p>
+<p class="footer-credits-right">Faces collage by Sam Elliot</p>
+</div>
+</div>
+</footer>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── BACKGROUND BOUNCE ───────────────────────────────────────
+    (function () {
+      const SPEED = 1; // percentage units per second
+      const bg    = document.getElementById('bg-pan');
+
+      let x = 33 + Math.random() * 34;
+      let y = 33 + Math.random() * 34;
+
+      const AVOID = Math.PI / 8;
+      let angle = Math.random() * Math.PI * 2;
+      const mod = ((angle % (Math.PI / 2)) + Math.PI / 2) % (Math.PI / 2);
+      if (mod < AVOID)                  angle += AVOID - mod;
+      else if (mod > Math.PI/2 - AVOID) angle -= mod - (Math.PI/2 - AVOID);
+
+      let vx = Math.cos(angle);
+      let vy = Math.sin(angle);
+      let lastTime = null;
+
+      function tick(ts) {
+        if (!lastTime) { lastTime = ts; requestAnimationFrame(tick); return; }
+        const dt = Math.min((ts - lastTime) / 1000, 0.05);
+        lastTime = ts;
+
+        x += vx * SPEED * dt;
+        y += vy * SPEED * dt;
+
+        let bounced = false;
+        if (x <= 0)   { x = -x;       vx =  Math.abs(vx); bounced = true; }
+        if (x >= 100) { x = 200 - x;  vx = -Math.abs(vx); bounced = true; }
+        if (y <= 0)   { y = -y;       vy =  Math.abs(vy); bounced = true; }
+        if (y >= 100) { y = 200 - y;  vy = -Math.abs(vy); bounced = true; }
+        if (bounced && window._onBounce) window._onBounce();
+
+        x = Math.min(100, Math.max(0, x));
+        y = Math.min(100, Math.max(0, y));
+
+        bg.style.backgroundPosition = x.toFixed(2) + '% ' + y.toFixed(2) + '%';
+        requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    })();
+
+    // ── MOBILE MENU ─────────────────────────────────────────────
+    (function () {
+      const toggle = document.getElementById('mobile-toggle');
+      const drawer = document.getElementById('mobile-drawer');
+
+      toggle.addEventListener('click', () => {
+        const open = toggle.classList.toggle('open');
+        drawer.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open);
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        drawer.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        drawer.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }));
+    })();
+
+    // ── FOOTER ICON POPUPS ───────────────────────────────────
+    (function () {
+      const iconBtns = document.querySelectorAll('.footer-social-icon[data-popup]');
+
+      function closeAll() {
+        iconBtns.forEach(b => {
+          b.classList.remove('active');
+          const popup = document.getElementById(b.dataset.popup);
+          if (popup) popup.classList.remove('active');
+        });
+      }
+
+      iconBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const popupId = btn.dataset.popup;
+          const popup   = document.getElementById(popupId);
+          const isOpen  = popup && popup.classList.contains('active');
+          closeAll();
+          if (!isOpen && popup) {
+            popup.classList.add('active');
+            btn.classList.add('active');
+          }
+        });
+      });
+
+      // Close on outside click
+      document.addEventListener('click', function () {
+        closeAll();
+      });
+
+      // Prevent popup link clicks from closing the popup before navigating
+      document.querySelectorAll('.icon-popup').forEach(popup => {
+        popup.addEventListener('click', function (e) {
+          e.stopPropagation();
+        });
+      });
+    })();
+
+    // ── PREVENT IMAGE DRAG ──────────────────────────────────────
+    document.addEventListener('dragstart', function(e) {
+      if (e.target.tagName === 'IMG' || e.target.tagName === 'SVG') {
+        e.preventDefault();
+      }
+    });
+
+  </script>
+<!-- ── MUSIC MODULE ─────────────────────────────────────────── -->
+
+<script>
+    (function () {
+
+      const TONE_JS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js';
+      let toneLoadPromise = null;
+      function ensureToneLoaded() {
+        if (window.Tone) return Promise.resolve();
+        if (toneLoadPromise) return toneLoadPromise;
+        toneLoadPromise = new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = TONE_JS_URL;
+          s.async = true;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.body.appendChild(s);
+        });
+        return toneLoadPromise;
+      }
+
+      const MODE_NAMES = ['I','II','III','IV','V','VI','VII'];
+      const ROOT = 59; // B3
+
+      // All modes rooted on B — intervals in semitones
+      const MODES = [
+        [0,2,4,5,7,9,11], // I   B Ionian      B C# D# E  F# G# A#
+        [0,2,3,5,7,9,10], // II  B Dorian       B C# D  E  F# G# A
+        [0,1,3,5,7,8,10], // III B Phrygian     B C  D  E  F# G  A
+        [0,2,4,6,7,9,11], // IV  B Lydian       B C# D# E# F# G# A#
+        [0,2,4,5,7,9,10], // V   B Mixolydian   B C# D# E  F# G# A
+        [0,2,3,5,7,8,10], // VI  B Aeolian      B C# D  E  F# G  A
+        [0,1,3,5,6,8,10]  // VII B Locrian      B C  D  E  F  G  A
+      ];
+
+      const VOL_MAX = 10;
+      let volLevel   = 3;  // default 30%
+      let modeIndex  = 4;  // default V Mixolydian
+      let isPlaying  = false;
+      let audioReady = false;
+      let resetting  = false;
+
+      const btnPlay  = document.getElementById('btn-playpause');
+      const playIcon = document.getElementById('play-icon');
+      const stopIcon = document.getElementById('stop-icon');
+      const btnKey   = document.getElementById('btn-key');
+      const btnVolUp = document.getElementById('btn-vol-up');
+      const btnVolDn = document.getElementById('btn-vol-down');
+
+      // Audio nodes — declared here so dispose can reach them all
+      let masterGain, masterReverb;
+      let bellSynth, bellDelay, bellDelayFilter;
+      let padSynth, padDelay, padChorus, padFilter, padHPF,
+          padLowShelf, padHighShelf, padWidener, padPanner;
+
+      // Pad sequencer state
+      let padInterval  = null;
+      let padStepIndex = 0;
+      let lastBellMidi = null;
+      let lastPadMidi  = null;
+
+      // ── Volume ───────────────────────────────────────────────
+      function volToGain(v) { return v / VOL_MAX; }
+
+      function updateVolUI() {
+        btnVolUp.classList.toggle('at-limit', volLevel >= VOL_MAX);
+        btnVolDn.classList.toggle('at-limit', volLevel <= 0);
+        if (audioReady) {
+          masterGain.gain.cancelScheduledValues(Tone.now());
+          masterGain.gain.setValueAtTime(volToGain(volLevel), Tone.now());
+        }
+      }
+
+      let volHoldTimer = null;
+      let volHoldInterval = null;
+
+      function startVolHold(dir) {
+        const step = () => {
+          if (dir ===  1 && volLevel < VOL_MAX) { volLevel++; updateVolUI(); }
+          if (dir === -1 && volLevel > 0)        { volLevel--; updateVolUI(); }
+        };
+        step();
+        volHoldTimer = setTimeout(() => { volHoldInterval = setInterval(step, 100); }, 400);
+      }
+
+      function stopVolHold() {
+        clearTimeout(volHoldTimer);
+        clearInterval(volHoldInterval);
+      }
+
+      ['mousedown','touchstart'].forEach(ev => {
+        btnVolUp.addEventListener(ev, e => { e.preventDefault(); startVolHold(1);  });
+        btnVolDn.addEventListener(ev, e => { e.preventDefault(); startVolHold(-1); });
+      });
+      ['mouseup','mouseleave','touchend','touchcancel'].forEach(ev => {
+        btnVolUp.addEventListener(ev, stopVolHold);
+        btnVolDn.addEventListener(ev, stopVolHold);
+      });
+
+      // ── Audio init ───────────────────────────────────────────
+      async function initAudio() {
+        if (audioReady) return;
+
+        masterGain   = new Tone.Gain(volToGain(volLevel)).toDestination();
+        masterReverb = new Tone.Reverb({ decay: 10, preDelay: 0.05, wet: 0.5 });
+        await masterReverb.generate();
+
+        // Bell chain: bellSynth → bellDelayFilter → bellDelay → masterReverb → masterGain
+        bellDelay       = new Tone.PingPongDelay({ delayTime: 0.68, feedback: 0.88, wet: 0.18 });
+        bellDelayFilter = new Tone.Filter({ frequency: 3000, type: 'lowpass', rolloff: -12 });
+        bellSynth = new Tone.FMSynth({
+          harmonicity: 3.5,
+          modulationIndex: 8,
+          envelope:           { attack: 0.005, decay: 1.2, sustain: 0.05, release: 2 },
+          modulationEnvelope: { attack: 0.005, decay: 0.8, sustain: 0,    release: 1.5 },
+          volume: -10
+        });
+        bellSynth.chain(bellDelayFilter, bellDelay, masterReverb, masterGain);
+
+        // Pad chain: padSynth → padHPF → padLowShelf → padHighShelf → padFilter
+        //            → padChorus → padWidener → padPanner → padDelay → masterReverb → masterGain
+        padDelay     = new Tone.PingPongDelay({ delayTime: 0.68, feedback: 0.88, wet: 0.35 });
+        padChorus    = new Tone.Chorus({ frequency: 0.25, delayTime: 4, depth: 0.5, wet: 0.5 }).start();
+        padFilter    = new Tone.Filter({ frequency: 900,  type: 'lowpass',  rolloff: -24 });
+        padHPF       = new Tone.Filter({ frequency: 87,   type: 'highpass', rolloff: -12 });
+        padLowShelf  = new Tone.Filter({ frequency: 329,  type: 'lowshelf',  gain: 6 });
+        padHighShelf = new Tone.Filter({ frequency: 500,  type: 'highshelf', gain: -9 });
+        padWidener   = new Tone.StereoWidener(0.5);
+        padPanner    = new Tone.Panner(0);
+        padSynth = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: 'sine' },
+          envelope: { attack: 4, decay: 1, sustain: 0.6, release: 15 },
+          volume: -36
+        });
+        padSynth.chain(padHPF, padLowShelf, padHighShelf, padFilter,
+                       padChorus, padWidener, padPanner, padDelay,
+                       masterReverb, masterGain);
+
+        audioReady = true;
+      }
+
+      // ── Note helpers ─────────────────────────────────────────
+      function randomNoteMidi() {
+        const pool = [];
+        MODES[modeIndex].forEach(i => {
+          for (let oct = 0; oct < 2; oct++) {
+            const m = ROOT + i + oct * 12;
+            if (m <= ROOT + 24) pool.push(m);
+          }
+        });
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      // Nearest B (pitch class 11) to a given midi note
+      function nearestB(midi) {
+        const pc = midi % 12;
+        const dn = (pc - 11 + 12) % 12;
+        const up = (11 - pc + 12) % 12;
+        return dn <= up ? midi - dn : midi + up;
+      }
+
+      // Random octave of a pitch class within B3–C6 (MIDI 59–84)
+      function randomOctaveOf(pitchClass) {
+        const candidates = [];
+        for (let m = 59; m <= 84; m++) {
+          if (m % 12 === pitchClass) candidates.push(m);
+        }
+        // Exclude last pad note if same pitch class to prevent octave repeats
+        const pool = (lastPadMidi !== null && lastPadMidi % 12 === pitchClass)
+          ? candidates.filter(m => m !== lastPadMidi)
+          : candidates;
+        return (pool.length > 0 ? pool : candidates)[Math.floor(Math.random() * (pool.length || candidates.length))];
+      }
+
+      // ── Pad sequencer ────────────────────────────────────────
+      // Step 1 (idx 0): bell note, 1 octave down (min B3) — fires immediately on PLAY
+      // Step 2 (idx 1): nearest B to that note
+      // Steps 3–5 loop: 2nd/5th of mode | bell pitch class random oct | B random oct
+      function firePadStep() {
+        if (!isPlaying || !audioReady || lastBellMidi === null) return;
+
+        const ref = lastBellMidi;
+        const PAN_POSITIONS = [-0.75, -0.25, 0, 0.25, 0.75];
+        let midi;
+
+        switch (padStepIndex) {
+          case 0:
+            midi = Math.max(ref - 12, 59);
+            break;
+          case 1:
+            midi = Math.max(nearestB(ref - 12), 59);
+            break;
+          case 2: {
+            const secondPC = (ROOT + MODES[modeIndex][1]) % 12;
+            const fifthPC  = (ROOT + MODES[modeIndex][4]) % 12;
+            midi = randomOctaveOf(Math.random() < 0.5 ? secondPC : fifthPC);
+            break;
+          }
+          case 3:
+            midi = randomOctaveOf(ref % 12);
+            break;
+          case 4:
+            midi = randomOctaveOf(11); // B
+            break;
+        }
+
+        padPanner.pan.setValueAtTime(
+          PAN_POSITIONS[Math.floor(Math.random() * PAN_POSITIONS.length)],
+          Tone.now()
+        );
+
+        padSynth.triggerAttackRelease(Tone.Frequency(midi, 'midi').toNote(), 8);
+        lastPadMidi = midi;
+
+        // Steps 1–2 run once; then loop steps 3–4–5 (indices 2–3–4)
+        padStepIndex = padStepIndex < 2 ? padStepIndex + 1
+                     : padStepIndex === 4 ? 2 : padStepIndex + 1;
+      }
+
+      function startPadSequencer() {
+        padStepIndex = 0;
+        if (padInterval) clearInterval(padInterval);
+        firePadStep();
+        padInterval = setInterval(firePadStep, 10000);
+      }
+
+      function stopPadSequencer() {
+        if (padInterval) { clearInterval(padInterval); padInterval = null; }
+        padStepIndex = 0;
+        lastPadMidi  = null;
+      }
+
+      // ── Bell trigger ─────────────────────────────────────────
+      function triggerBell() {
+        if (!isPlaying || !audioReady) return;
+        const midi = randomNoteMidi();
+        lastBellMidi = midi;
+        bellSynth.triggerAttackRelease(Tone.Frequency(midi, 'midi').toNote(), '2n');
+      }
+
+      window._onBounce = function () {
+        if (isPlaying && audioReady && !resetting) triggerBell();
+      };
+
+      // ── Stop / reset ─────────────────────────────────────────
+      function fadeOutAndReset() {
+        if (!audioReady || resetting) return;
+        resetting = true;
+        btnPlay.disabled = true;
+        btnPlay.style.opacity = '0.4';
+
+        const FADE = 0.4;
+        const now  = Tone.now();
+        masterGain.gain.cancelScheduledValues(now);
+        masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+        masterGain.gain.linearRampToValueAtTime(0, now + FADE);
+
+        setTimeout(() => {
+          [bellSynth, bellDelayFilter, bellDelay,
+           padSynth, padHPF, padLowShelf, padHighShelf, padFilter,
+           padChorus, padWidener, padPanner, padDelay,
+           masterReverb, masterGain].forEach(node => {
+            try { node.dispose(); } catch(e) {}
+          });
+          audioReady = false;
+          resetting  = false;
+          btnPlay.disabled      = false;
+          btnPlay.style.opacity = '';
+        }, (FADE + 0.3) * 1000);
+      }
+
+      // ── Play / stop ──────────────────────────────────────────
+      btnPlay.addEventListener('click', async () => {
+        if (resetting) return;
+        await ensureToneLoaded();
+        await Tone.start();
+
+        if (!isPlaying) {
+          await initAudio();
+          lastBellMidi = ROOT + MODES[modeIndex][0];
+          isPlaying = true;
+          playIcon.style.display = 'none';
+          stopIcon.style.display = '';
+          btnPlay.classList.add('is-playing');
+          triggerBell();
+          startPadSequencer();
+        } else {
+          isPlaying = false;
+          stopPadSequencer();
+          playIcon.style.display = '';
+          stopIcon.style.display = 'none';
+          btnPlay.classList.remove('is-playing');
+          fadeOutAndReset();
+        }
+      });
+
+      // ── Key ──────────────────────────────────────────────────
+      const KEY_COLORS = [
+        '#1a1a1a', // I   white btn → black indicator
+        '#4a82a8', // II  blue
+        '#3a7298', // III deeper blue
+        '#c8820a', // IV  amber
+        '#b86820', // V   orange
+        '#2a6898', // VI  deep blue
+        '#c87840'  // VII warm peach
+      ];
+
+      function applyKeyColour(idx) {
+        btnKey.setAttribute('data-mode', idx);
+        document.documentElement.style.setProperty('--fader-color', KEY_COLORS[idx]);
+      }
+
+      applyKeyColour(modeIndex);
+      updateVolUI();
+
+      btnKey.addEventListener('click', () => {
+        modeIndex = (modeIndex + 1) % 7;
+        btnKey.textContent = MODE_NAMES[modeIndex];
+        applyKeyColour(modeIndex);
+      });
+
+      // ── Collapse ─────────────────────────────────────────────
+      const moduleTab     = document.getElementById('module-tab');
+      const moduleButtons = document.getElementById('module-buttons');
+      const musicModule   = document.getElementById('music-module');
+
+      moduleTab.addEventListener('click', () => {
+        const collapsed = moduleButtons.classList.toggle('collapsed');
+        moduleTab.classList.toggle('collapsed', collapsed);
+        musicModule.classList.toggle('collapsed', collapsed);
+        moduleTab.setAttribute('aria-expanded', !collapsed);
+        moduleTab.setAttribute('aria-label', collapsed ? 'Reveal module' : 'Collapse module');
+      });
+
+    })();
+
+  </script>
+</body>
+</html>
